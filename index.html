@@ -255,17 +255,78 @@ body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:
 .complete-btn.done { background:var(--accent3); color:#000; }
 
 /* RESPONSIVE */
+/* ===== FULL MOBILE RESPONSIVE ===== */
 @media(max-width:900px) {
-  #sidebar { transform:translateX(-100%); }
-  #sidebar.open { transform:translateX(0); }
+  #sidebar { transform:translateX(-100%); width:85vw; max-width:320px; }
+  #sidebar.open { transform:translateX(0); box-shadow:0 0 60px rgba(0,0,0,.6); }
   #main { margin-left:0; }
-  .module-page, #hero { padding:30px 24px; }
-  #hero h1 { font-size:32px; }
-  .hero-stats { gap:20px; }
+  .module-page, #hero { padding:24px 16px 60px; }
+  #hero h1 { font-size:28px; }
+  #hero p { font-size:15px; }
+  .hero-stats { gap:12px; justify-content:center; }
+  .hero-stat { padding:14px 18px !important; flex:1; min-width:120px; }
+  .hero-stat .num { font-size:26px !important; }
+  .hero-stat .lbl { font-size:10px; }
+  .hero-cta { width:100%; justify-content:center; padding:16px; font-size:16px; }
+  .hero-orb { display:none; }
+  .module-header h2 { font-size:24px; }
+  .module-desc { font-size:14px; }
+  .module-meta { gap:8px; }
+  .module-meta-item { font-size:11px; padding:4px 10px; }
+  .card-grid { grid-template-columns:1fr; gap:12px; }
+  .card { padding:18px; }
+  .card h3 { font-size:14px; }
+  .section-header { padding:14px 16px; }
+  .section-header h3 { font-size:14px; }
+  .section-body { padding:16px; }
+  .callout { padding:12px 14px; flex-direction:column; gap:8px; }
+  .callout-icon { font-size:18px; }
+  .checklist li { font-size:13px; padding:8px 0; }
+  .checklist li .cb { width:18px; height:18px; }
+  .metrics { grid-template-columns:1fr 1fr; gap:10px; }
+  .metric { padding:14px; }
+  .metric .m-val { font-size:24px; }
+  .formula .formula-eq { font-size:16px; }
+  .highlight-box { padding:18px; }
+  .highlight-box h3 { font-size:16px; }
+  .complete-btn, .next-module-btn { width:100%; justify-content:center; }
+  .tabs .tab-nav { overflow-x:auto; -webkit-overflow-scrolling:touch; flex-wrap:nowrap; }
+  .tab-btn { white-space:nowrap; padding:8px 14px; font-size:12px; }
+  .styled-table { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  h3.section-title { font-size:18px; }
+  .sidebar-footer { display:none; }
+  .time-badge { font-size:10px; }
+  .code-block { font-size:11px; padding:12px 14px; }
 }
 
-.burger { display:none; position:fixed; top:16px; left:16px; z-index:200; background:var(--bg2); border:1px solid var(--border); padding:10px; border-radius:8px; cursor:pointer; color:var(--text); font-size:18px; }
-@media(max-width:900px) { .burger { display:block; } }
+@media(max-width:400px) {
+  #hero h1 { font-size:24px; }
+  .hero-stats { flex-direction:column; align-items:stretch; }
+  .hero-stat { min-width:auto; }
+  .module-header h2 { font-size:22px; }
+  .card-grid { grid-template-columns:1fr; }
+  .metrics { grid-template-columns:1fr; }
+}
+
+/* BURGER MENU */
+.burger { display:none; position:fixed; top:16px; left:16px; z-index:200; background:var(--bg2); border:1px solid var(--border); width:44px; height:44px; border-radius:12px; cursor:pointer; color:var(--text); font-size:20px; align-items:center; justify-content:center; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); transition:all .3s; }
+.burger:hover { background:var(--bg3); border-color:var(--accent); }
+@media(max-width:900px) { .burger { display:flex; } }
+
+/* MOBILE OVERLAY */
+.sidebar-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:99; backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); opacity:0; transition:opacity .3s; }
+.sidebar-overlay.active { display:block; opacity:1; }
+
+/* BOTTOM NAV BAR (mobile) */
+.mobile-bottom-bar { display:none; position:fixed; bottom:0; left:0; right:0; height:60px; background:var(--bg2); border-top:1px solid var(--border); z-index:98; padding:8px 16px; justify-content:space-around; align-items:center; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); }
+@media(max-width:900px) { .mobile-bottom-bar { display:flex; } }
+.mob-btn { display:flex; flex-direction:column; align-items:center; gap:2px; background:none; border:none; color:var(--text3); font-size:18px; cursor:pointer; padding:4px 12px; border-radius:8px; transition:all .2s; }
+.mob-btn span { font-size:9px; font-weight:600; }
+.mob-btn.active, .mob-btn:hover { color:var(--accent); background:rgba(108,99,255,.1); }
+
+/* PULL TO REFRESH INDICATOR */
+.pull-indicator { position:fixed; top:-50px; left:50%; transform:translateX(-50%); background:var(--bg2); border:1px solid var(--border); border-radius:25px; padding:8px 20px; font-size:12px; color:var(--text3); z-index:200; transition:top .3s; }
+.pull-indicator.visible { top:16px; }
 
 /* Pill labels */
 .pill { display:inline-block; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; }
@@ -284,11 +345,194 @@ ul.body-list li { font-size:14px; color:var(--text2); line-height:1.8; margin-bo
 .level-badge { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; }
 .level-easy { background:rgba(67,233,123,.15); color:var(--accent3); }
 .level-medium { background:rgba(249,168,37,.15); color:var(--accent4); }
+
+/* ===== ANIMATIONS & DYNAMIC ELEMENTS ===== */
+
+/* Page fade-in */
+@keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes slideInLeft { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.6; } }
+@keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-12px); } }
+@keyframes shimmer { 0% { background-position:-200% 0; } 100% { background-position:200% 0; } }
+@keyframes glow { 0%,100% { box-shadow:0 0 20px rgba(108,99,255,.2); } 50% { box-shadow:0 0 40px rgba(108,99,255,.4); } }
+@keyframes gradientShift { 0% { background-position:0% 50%; } 50% { background-position:100% 50%; } 100% { background-position:0% 50%; } }
+@keyframes scaleIn { from { opacity:0; transform:scale(.9); } to { opacity:1; transform:scale(1); } }
+@keyframes borderGlow { 0%,100% { border-color:rgba(108,99,255,.3); } 50% { border-color:rgba(108,99,255,.7); } }
+@keyframes confettiFall { 0% { transform:translateY(-100vh) rotate(0deg); opacity:1; } 100% { transform:translateY(100vh) rotate(720deg); opacity:0; } }
+@keyframes typewriter { from { width:0; } to { width:100%; } }
+@keyframes blink { 50% { border-color:transparent; } }
+@keyframes ripple { 0% { transform:scale(0); opacity:1; } 100% { transform:scale(4); opacity:0; } }
+@keyframes progressPulse { 0%,100% { box-shadow:0 0 0 0 rgba(108,99,255,.4); } 50% { box-shadow:0 0 0 8px rgba(108,99,255,0); } }
+
+/* Hero animations */
+#hero { animation:fadeIn .8s ease-out; }
+#hero h1 { animation:fadeInUp .8s ease-out .2s both; }
+#hero p { animation:fadeInUp .8s ease-out .4s both; }
+.hero-stats { animation:fadeInUp .8s ease-out .6s both; }
+.hero-cta { animation:fadeInUp .8s ease-out .8s both; }
+.hero-cta:active { transform:scale(.95) !important; }
+
+/* Floating orbs in hero */
+.hero-orb {
+  position:absolute; border-radius:50%; pointer-events:none; z-index:0;
+  background:radial-gradient(circle, rgba(108,99,255,.12), transparent 70%);
+  animation:float 6s ease-in-out infinite;
+}
+.hero-orb:nth-child(1) { width:300px; height:300px; top:10%; right:5%; animation-delay:0s; }
+.hero-orb:nth-child(2) { width:200px; height:200px; bottom:10%; left:10%; animation-delay:2s; background:radial-gradient(circle, rgba(255,101,132,.1), transparent 70%); }
+.hero-orb:nth-child(3) { width:150px; height:150px; top:50%; right:30%; animation-delay:4s; background:radial-gradient(circle, rgba(67,233,123,.08), transparent 70%); }
+
+/* Particle canvas */
+#particles-canvas { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+
+/* Glassmorphism hero stats */
+.hero-stat {
+  background:rgba(255,255,255,.04) !important;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;
+  padding:24px 32px;
+  transition:all .3s;
+}
+.hero-stat:hover { background:rgba(255,255,255,.08) !important; transform:translateY(-4px); border-color:rgba(108,99,255,.4); }
+
+/* Card enhancements */
+.card { transition:all .35s cubic-bezier(.4,0,.2,1); }
+.card:hover { transform:translateY(-6px) !important; box-shadow:0 12px 40px rgba(108,99,255,.25) !important; border-color:var(--accent) !important; }
+.card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--accent2)); transform:scaleX(0); transition:transform .35s; transform-origin:left; border-radius:16px 16px 0 0; }
+.card:hover::before { transform:scaleX(1); }
+
+/* Section block animation */
+.section-block { transition:all .3s; }
+.section-block:hover { border-color:rgba(108,99,255,.4); box-shadow:0 4px 24px rgba(108,99,255,.1); }
+.section-body { animation:fadeInUp .3s ease-out; }
+
+/* Button ripple effect */
+.hero-cta, .complete-btn { position:relative; overflow:hidden; }
+.ripple-effect { position:absolute; border-radius:50%; background:rgba(255,255,255,.3); animation:ripple .6s linear; pointer-events:none; }
+
+/* Module page transitions */
+.module-page { animation:fadeInUp .4s ease-out; }
+
+/* Nav item enhanced hover */
+.nav-item { transition:all .25s cubic-bezier(.4,0,.2,1); }
+.nav-item:hover .nav-num { transform:scale(1.1); }
+.nav-item.active { animation:slideInLeft .3s ease-out; }
+.nav-item.completed { position:relative; }
+.nav-item.completed::after { content:''; position:absolute; right:8px; width:6px; height:6px; border-radius:50%; background:var(--accent3); animation:pulse 2s infinite; }
+
+/* Progress bar glow */
+.progress-fill { animation:progressPulse 2s infinite; }
+.progress-track { position:relative; overflow:visible; }
+
+/* Checklist animation */
+.checklist li { transition:all .25s; }
+.checklist li:hover { padding-left:6px; }
+.checklist li.checked { animation:fadeIn .3s; }
+.checklist li .cb { transition:all .25s cubic-bezier(.4,0,.2,1); }
+.checklist li:hover .cb { border-color:var(--accent); }
+.checklist li.checked .cb { transform:scale(1.1); }
+
+/* Callout entrance */
+.callout { transition:all .3s; }
+.callout:hover { transform:translateX(4px); }
+
+/* Metric cards */
+.metric { transition:all .3s; }
+.metric:hover { transform:translateY(-4px); border-color:var(--accent); box-shadow:0 8px 30px rgba(108,99,255,.2); }
+.metric .m-val { transition:all .3s; }
+.metric:hover .m-val { transform:scale(1.05); }
+
+/* Confetti container */
+#confetti-container { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9999; overflow:hidden; }
+.confetti-piece { position:absolute; width:10px; height:10px; top:-10px; animation:confettiFall 3s linear forwards; }
+
+/* Scroll progress bar (top) */
+#scroll-progress { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,#6c63ff,#ff6584,#43e97b); z-index:1000; transition:width .1s; width:0%; }
+
+/* Module completion celebration */
+.complete-btn { transition:all .3s cubic-bezier(.4,0,.2,1); }
+.complete-btn:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(67,233,123,.3); }
+.complete-btn.done { animation:scaleIn .4s cubic-bezier(.4,0,.2,1); background:var(--accent3); color:#000; }
+
+/* Intro cinematic screen */
+#loading-screen { position:fixed; inset:0; background:var(--bg); z-index:10000; transition:opacity .8s, visibility .8s; }
+#loading-screen.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+#intro-scene { position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+#intro-canvas { position:absolute; inset:0; width:100%; height:100%; }
+#intro-content { position:relative; z-index:1; text-align:center; padding:20px; }
+
+@media(max-width:600px) {
+  #intro-content h1 { font-size:28px !important; }
+  #intro-content p { font-size:13px !important; }
+}
+
+/* Tooltip */
+.tooltip { position:relative; }
+.tooltip::after { content:attr(data-tip); position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%) scale(.8); background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:6px 12px; border-radius:8px; font-size:11px; white-space:nowrap; opacity:0; pointer-events:none; transition:all .2s; z-index:999; }
+.tooltip:hover::after { opacity:1; transform:translateX(-50%) scale(1); }
+
+/* Keyboard shortcut badges */
+.kbd { display:inline-flex; align-items:center; justify-content:center; min-width:22px; height:22px; padding:0 6px; background:var(--bg3); border:1px solid var(--border); border-radius:4px; font-size:10px; font-family:monospace; color:var(--text3); margin:0 2px; }
+
+/* Module time estimate badge */
+.time-badge { display:inline-flex; align-items:center; gap:4px; background:rgba(108,99,255,.1); border:1px solid rgba(108,99,255,.2); padding:4px 10px; border-radius:8px; font-size:11px; color:var(--accent); font-weight:600; }
+
+/* Reading progress per module */
+.reading-bar { height:2px; background:var(--border); margin-top:20px; border-radius:2px; overflow:hidden; }
+.reading-bar-fill { height:100%; background:linear-gradient(90deg,var(--accent),var(--accent3)); width:0%; transition:width .3s; }
+
+/* Glassmorphism for highlight boxes */
+.highlight-box { backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); transition:all .3s; }
+.highlight-box:hover { border-color:rgba(108,99,255,.5); transform:translateY(-2px); }
+
+/* Next module button */
+.next-module-btn { display:inline-flex; align-items:center; gap:8px; background:linear-gradient(135deg,var(--accent),#8b5cf6); color:#fff; padding:10px 22px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; border:none; transition:all .3s; margin-top:16px; margin-left:12px; }
+.next-module-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(108,99,255,.4); }
+
+/* Sidebar footer with keyboard hints */
+.sidebar-footer { padding:16px 20px; border-top:1px solid var(--border); margin-top:auto; }
+.sidebar-footer p { font-size:10px; color:var(--text3); line-height:1.6; }
 </style>
 </head>
 <body>
 
-<button class="burger" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+<!-- INTRO CINEMATIC SCREEN -->
+<div id="loading-screen">
+  <div id="intro-scene">
+    <canvas id="intro-canvas"></canvas>
+    <div id="intro-content">
+      <div id="intro-logo" style="opacity:0;transform:scale(.5)">
+        <div style="display:inline-block;background:linear-gradient(135deg,#6c63ff,#ff6584);color:#fff;font-size:11px;font-weight:800;letter-spacing:3px;padding:6px 16px;border-radius:25px;text-transform:uppercase;margin-bottom:16px;">Formation E-commerce</div>
+        <h1 style="font-size:42px;font-weight:900;line-height:1.1;margin-bottom:12px;color:#fff;">De zéro à<br><span style="background:linear-gradient(135deg,#6c63ff,#ff6584,#43e97b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:gradientShift 3s ease infinite;">10 000€/mois</span></h1>
+        <p style="font-size:15px;color:#9999bb;margin-bottom:24px;">15 modules · 100% actionnable · Zéro prérequis</p>
+        <div id="intro-progress-wrap" style="width:200px;margin:0 auto;">
+          <div style="height:3px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;"><div id="intro-progress-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#6c63ff,#43e97b);border-radius:3px;transition:width .3s;"></div></div>
+          <p id="intro-status" style="font-size:11px;color:#6666aa;margin-top:8px;text-align:center;">Initialisation...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress"></div>
+
+<!-- CONFETTI CONTAINER -->
+<div id="confetti-container"></div>
+
+<button class="burger" onclick="toggleSidebar()">☰</button>
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- MOBILE BOTTOM NAV -->
+<div class="mobile-bottom-bar">
+  <button class="mob-btn active" onclick="showPage('hero')" id="mob-home">🏠<span>Accueil</span></button>
+  <button class="mob-btn" onclick="goToPrevModule()" id="mob-prev">◀<span>Précédent</span></button>
+  <button class="mob-btn" onclick="goToNextModule()" id="mob-next">▶<span>Suivant</span></button>
+  <button class="mob-btn" onclick="toggleSidebar()" id="mob-menu">☰<span>Modules</span></button>
+</div>
 
 <!-- SIDEBAR -->
 <nav id="sidebar">
@@ -303,27 +547,32 @@ ul.body-list li { font-size:14px; color:var(--text2); line-height:1.8; margin-bo
   </div>
   <div class="nav-section">Accueil</div>
   <div class="nav-item active" onclick="showPage('hero')" id="nav-hero"><div class="nav-num">🏠</div><div class="nav-text">Bienvenue<small>Par où commencer</small></div></div>
+  <div class="nav-section">🧠 Mindset</div>
+  <div class="nav-item" onclick="showPage('m1')" id="nav-m1"><div class="nav-num">1</div><div class="nav-text">Le mindset du winner<small>La mentalité qui fait tout</small></div><span class="check-icon">✓</span></div>
   <div class="nav-section">Comprendre le business</div>
-  <div class="nav-item" onclick="showPage('m1')" id="nav-m1"><div class="nav-num">1</div><div class="nav-text">C'est quoi le e-commerce ?<small>Le modèle expliqué simplement</small></div><span class="check-icon">✓</span></div>
-  <div class="nav-item" onclick="showPage('m2')" id="nav-m2"><div class="nav-num">2</div><div class="nav-text">Trouver sa niche<small>Choisir quoi vendre</small></div><span class="check-icon">✓</span></div>
-  <div class="nav-item" onclick="showPage('m3')" id="nav-m3"><div class="nav-num">3</div><div class="nav-text">Fournisseurs & Produits<small>Où acheter, à quel prix</small></div><span class="check-icon">✓</span></div>
-  <div class="nav-section">Créer sa boutique</div>
-  <div class="nav-item" onclick="showPage('m4')" id="nav-m4"><div class="nav-num">4</div><div class="nav-text">Shopify de A à Z<small>Créer sa boutique en 48h</small></div><span class="check-icon">✓</span></div>
-  <div class="nav-item" onclick="showPage('m5')" id="nav-m5"><div class="nav-num">5</div><div class="nav-text">Fiches produit qui vendent<small>Photos, textes, prix</small></div><span class="check-icon">✓</span></div>
-  <div class="nav-section">Comprendre Google</div>
-  <div class="nav-item" onclick="showPage('m6')" id="nav-m6"><div class="nav-num">6</div><div class="nav-text">SEO vs SEA expliqué<small>Gratuit vs payant</small></div><span class="check-icon">✓</span></div>
-  <div class="nav-item" onclick="showPage('m7')" id="nav-m7"><div class="nav-num">7</div><div class="nav-text">Les mots-clés pour les nuls<small>Comprendre les recherches</small></div><span class="check-icon">✓</span></div>
-  <div class="nav-section">Premiers pas Google Ads</div>
-  <div class="nav-item" onclick="showPage('m8')" id="nav-m8"><div class="nav-num">8</div><div class="nav-text">Créer son compte Ads<small>Setup complet guidé</small></div><span class="check-icon">✓</span></div>
-  <div class="nav-item" onclick="showPage('m9')" id="nav-m9"><div class="nav-num">9</div><div class="nav-text">Première campagne Shopping<small>Lancer sa première pub</small></div><span class="check-icon">✓</span></div>
-  <div class="nav-item" onclick="showPage('m10')" id="nav-m10"><div class="nav-num">10</div><div class="nav-text">Lire ses résultats<small>Comprendre les chiffres</small></div><span class="check-icon">✓</span></div>
-  <div class="nav-section">Objectif 10k€/mois</div>
-  <div class="nav-item" onclick="showPage('m11')" id="nav-m11"><div class="nav-num">11</div><div class="nav-text">SEO pour débutants<small>Être trouvé gratuitement</small></div><span class="check-icon">✓</span></div>
-  <div class="nav-item" onclick="showPage('m12')" id="nav-m12"><div class="nav-num">12</div><div class="nav-text">Premières optimisations<small>Améliorer ses résultats</small></div><span class="check-icon">✓</span></div>
-  <div class="nav-item" onclick="showPage('m13')" id="nav-m13"><div class="nav-num">13</div><div class="nav-text">Email & Fidélisation<small>Garder ses clients</small></div><span class="check-icon">✓</span></div>
-  <div class="nav-item" onclick="showPage('m14')" id="nav-m14"><div class="nav-num">14</div><div class="nav-text">Roadmap 0 → 10k€<small>Votre plan d'action</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-item" onclick="showPage('m2')" id="nav-m2"><div class="nav-num">2</div><div class="nav-text">C'est quoi le e-commerce ?<small>Le modèle expliqué simplement</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-item" onclick="showPage('m3')" id="nav-m3"><div class="nav-num">3</div><div class="nav-text">Trouver sa niche<small>Choisir quoi vendre</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-item" onclick="showPage('m4')" id="nav-m4"><div class="nav-num">4</div><div class="nav-text">Fournisseurs & Produits<small>Où acheter, à quel prix</small></div><span class="check-icon">✓</span></div>
   <div class="nav-section">Juridique & Admin</div>
-  <div class="nav-item" onclick="showPage('m15')" id="nav-m15"><div class="nav-num">15</div><div class="nav-text">Créer son entreprise<small>Statut, TVA, légal</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-item" onclick="showPage('m5')" id="nav-m5"><div class="nav-num">5</div><div class="nav-text">Créer son entreprise<small>Statut, TVA, légal</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-section">Créer sa boutique</div>
+  <div class="nav-item" onclick="showPage('m6')" id="nav-m6"><div class="nav-num">6</div><div class="nav-text">Shopify de A à Z<small>Créer sa boutique en 48h</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-item" onclick="showPage('m7')" id="nav-m7"><div class="nav-num">7</div><div class="nav-text">Fiches produit qui vendent<small>Photos, textes, prix</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-section">Comprendre Google</div>
+  <div class="nav-item" onclick="showPage('m8')" id="nav-m8"><div class="nav-num">8</div><div class="nav-text">SEO vs SEA expliqué<small>Gratuit vs payant</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-item" onclick="showPage('m9')" id="nav-m9"><div class="nav-num">9</div><div class="nav-text">Les mots-clés pour les nuls<small>Comprendre les recherches</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-section">Premiers pas Google Ads</div>
+  <div class="nav-item" onclick="showPage('m10')" id="nav-m10"><div class="nav-num">10</div><div class="nav-text">Créer son compte Ads<small>Setup complet guidé</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-item" onclick="showPage('m11')" id="nav-m11"><div class="nav-num">11</div><div class="nav-text">Première campagne Shopping<small>Lancer sa première pub</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-item" onclick="showPage('m12')" id="nav-m12"><div class="nav-num">12</div><div class="nav-text">Lire ses résultats<small>Comprendre les chiffres</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-section">Objectif 10k€/mois</div>
+  <div class="nav-item" onclick="showPage('m13')" id="nav-m13"><div class="nav-num">13</div><div class="nav-text">SEO pour débutants<small>Être trouvé gratuitement</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-item" onclick="showPage('m14')" id="nav-m14"><div class="nav-num">14</div><div class="nav-text">Premières optimisations<small>Améliorer ses résultats</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-item" onclick="showPage('m15')" id="nav-m15"><div class="nav-num">15</div><div class="nav-text">Email & Fidélisation<small>Garder ses clients</small></div><span class="check-icon">✓</span></div>
+  <div class="nav-item" onclick="showPage('m16')" id="nav-m16"><div class="nav-num">16</div><div class="nav-text">Roadmap 0 → 10k€<small>Votre plan d'action</small></div><span class="check-icon">✓</span></div>
+  <div class="sidebar-footer">
+    <p>⌨️ Raccourcis clavier<br><span class="kbd">←</span> <span class="kbd">→</span> Navigation modules<br><span class="kbd">Esc</span> Retour accueil</p>
+  </div>
 </nav>
 
 <!-- MAIN -->
@@ -331,12 +580,14 @@ ul.body-list li { font-size:14px; color:var(--text2); line-height:1.8; margin-bo
 
 <!-- HERO -->
 <div id="hero" class="active">
+  <canvas id="particles-canvas"></canvas>
+  <div class="hero-orb"></div><div class="hero-orb"></div><div class="hero-orb"></div>
   <div style="position:relative;z-index:1;">
     <div class="hero-badge">Zéro prérequis · 100% actionnable</div>
     <h1>De zéro à vos<br>premiers <span>10 000€/mois</span></h1>
     <p>Vous n'avez jamais vendu en ligne ? Parfait. Cette formation vous prend par la main et vous emmène de "je ne sais pas par où commencer" à votre première boutique rentable. Pas de jargon, pas de blabla — que du concret.</p>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="num">15</div><div class="lbl">Modules pas-à-pas</div></div>
+      <div class="hero-stat"><div class="num">16</div><div class="lbl">Modules pas-à-pas</div></div>
       <div class="hero-stat"><div class="num">0€</div><div class="lbl">Prérequis</div></div>
       <div class="hero-stat"><div class="num">10k€</div><div class="lbl">Objectif mois</div></div>
       <div class="hero-stat"><div class="num">48h</div><div class="lbl">Pour lancer</div></div>
@@ -345,18 +596,207 @@ ul.body-list li { font-size:14px; color:var(--text2); line-height:1.8; margin-bo
   </div>
 
   <div style="margin-top:50px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;position:relative;z-index:1;">
-    <div class="card"><div class="card-icon">🧩</div><h3>Modules 1–3 : Comprendre</h3><p>Le business model, comment choisir sa niche, où trouver les produits et les fournisseurs.</p></div>
-    <div class="card"><div class="card-icon">🛒</div><h3>Modules 4–5 : Construire</h3><p>Créer sa boutique Shopify de A à Z et rédiger des fiches produit qui convertissent.</p></div>
-    <div class="card"><div class="card-icon">🔍</div><h3>Modules 6–7 : Apprendre Google</h3><p>Comprendre la différence SEO/SEA et les bases des mots-clés, sans jargon.</p></div>
-    <div class="card"><div class="card-icon">💰</div><h3>Modules 8–14 : Vendre & Grandir</h3><p>Première pub Google, lire les résultats, optimiser, et atteindre les 10 000€/mois.</p></div>
-    <div class="card"><div class="card-icon">📋</div><h3>Module 15 : Créer son entreprise</h3><p>Statut juridique, micro-entreprise vs société, TVA, mentions légales et obligations comptables.</p></div>
+    <div class="card" style="animation:fadeInUp .6s ease-out .2s both"><div class="card-icon">🧠</div><h3>Module 1 — Mindset</h3><p>Le seul module que personne n'enseigne. La mentalité qui sépare ceux qui réussissent des autres.</p><div class="time-badge" style="margin-top:10px">⏱ ~20min</div></div>
+    <div class="card" style="animation:fadeInUp .6s ease-out .4s both"><div class="card-icon">🧩</div><h3>Modules 2–4 — Comprendre</h3><p>Le business model e-commerce, choisir sa niche, trouver ses fournisseurs.</p><div class="time-badge" style="margin-top:10px">⏱ ~1h30</div></div>
+    <div class="card" style="animation:fadeInUp .6s ease-out .6s both"><div class="card-icon">⚖️</div><h3>Module 5 — Entreprise</h3><p>Créer son statut juridique, TVA, CGV et obligations légales avant de vendre.</p><div class="time-badge" style="margin-top:10px">⏱ ~45min</div></div>
+    <div class="card" style="animation:fadeInUp .6s ease-out .8s both"><div class="card-icon">🛒</div><h3>Modules 6–9 — Construire</h3><p>Shopify de A à Z, fiches produit qui vendent, SEO vs SEA, mots-clés.</p><div class="time-badge" style="margin-top:10px">⏱ ~2h</div></div>
+    <div class="card" style="animation:fadeInUp .6s ease-out 1s both"><div class="card-icon">💰</div><h3>Modules 10–16 — Vendre & Scaler</h3><p>Google Ads, première campagne, optimisation, email marketing et roadmap 10k€.</p><div class="time-badge" style="margin-top:10px">⏱ ~3h</div></div>
   </div>
 </div>
 
 <!-- MODULE 1 -->
 <div id="m1" class="module-page">
   <div class="module-header">
-    <div class="module-tag">🧩 Module 1 · Comprendre</div>
+    <div class="module-tag">🧠 Module 1 · Mindset</div>
+    <h2>Le mindset du <span class="gradient">winner</span></h2>
+    <p class="module-desc">Avant de créer votre boutique, d'apprendre Google Ads ou d'optimiser vos fiches produit, il y a quelque chose de plus important : votre état d'esprit. 90% des gens qui échouent en e-commerce n'ont pas un problème de stratégie. Ils ont un problème de mindset. Ce module change ça.</p>
+    <div class="module-meta"><div class="module-meta-item">⏱ 20 min</div><div class="module-meta-item">🧠 Fondamentaux</div><div class="module-meta-item">🔥 Priorité absolue</div></div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header open" onclick="toggleSection(this)">
+      <span class="sh-icon">💡</span>
+      <h3>La vérité que personne ne dit</h3>
+      <span class="sh-badge">Essentiel</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="callout danger">
+        <div class="callout-icon">🚨</div>
+        <div class="callout-content">
+          <h4>Statistique brutale</h4>
+          <p><strong>80% des boutiques e-commerce ferment dans les 6 premiers mois.</strong> Pas parce que la stratégie était mauvaise. Pas parce que le marché était saturé. Mais parce que le fondateur a abandonné trop tôt — souvent à 3 semaines du décollage.</p>
+        </div>
+      </div>
+      <p class="body-text">L'e-commerce est le business le plus accessible du monde. Pas de local, pas de stock obligatoire, pas de diplôme. Mais c'est précisément pour ça que tout le monde essaie, et que ceux qui manquent de patience abandonnent au premier obstacle.</p>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">❌</div>
+          <h3>Ce que les losers font</h3>
+          <p>Lancent une boutique en 2 jours, attendent des ventes dès le lendemain, paniquent après 1 semaine sans résultat, changent de niche toutes les 3 semaines, et concluent que "ça ne marche pas".</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">✅</div>
+          <h3>Ce que les winners font</h3>
+          <p>Traitent ça comme un vrai business, donnent minimum 90 jours à chaque stratégie, apprennent de chaque euro dépensé, et comprennent que les premières semaines sont une phase d'apprentissage — pas de profit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sh-icon">🎯</span>
+      <h3>Les 5 piliers du mindset e-commerce</h3>
+      <span class="sh-badge">Core</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">⏳</div>
+          <h3>1. La patience stratégique</h3>
+          <p>Google Ads a besoin de <strong>2–4 semaines</strong> pour apprendre votre audience. Le SEO prend <strong>3–6 mois</strong>. Si vous touchez à tout avant ce délai, vous détruisez l'apprentissage de l'algorithme. La règle d'or : <strong>lancer, puis NE PAS TOUCHER pendant 14 jours minimum.</strong></p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>2. Les données avant les émotions</h3>
+          <p>Vous aurez des journées à 0 vente. Des semaines négatives. Des produits que vous adorez mais qui ne se vendent pas. La règle : <strong>les chiffres décident, pas vos sentiments.</strong> Décidez toujours sur des données, jamais sur de l'instinct.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔁</div>
+          <h3>3. L'itération rapide</h3>
+          <p>Vous n'allez pas trouver du premier coup. Personne ne trouve du premier coup. Les winners testent vite, échouent vite, apprennent vite. <strong>Un test raté n'est pas un échec : c'est une information payante.</strong></p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <h3>4. L'apprentissage permanent</h3>
+          <p>Google change ses algorithmes. Les tendances évoluent. Ce qui marchait en 2022 peut ne plus marcher en 2025. <strong>Consacrez 30 min/jour à apprendre</strong> : YouTube, forums, newsletters, tests personnels. Votre edge, c'est votre savoir.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧱</div>
+          <h3>5. Le système avant les résultats</h3>
+          <p>Ne vous focalisez pas sur "combien j'ai gagné ce mois". Focalisez-vous sur "est-ce que j'ai exécuté mon plan ?". Les résultats sont une conséquence du système. <strong>Construisez les bons process et les chiffres suivront.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sh-icon">🧬</span>
+      <h3>Reprogrammer ses croyances limitantes</h3>
+      <span class="sh-badge">Psychologie</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <p class="body-text">Ces phrases, vous les penserez. Voici comment les démonter :</p>
+      <div class="styled-table-wrap" style="overflow-x:auto">
+        <table class="styled-table">
+          <thead><tr><th>Croyance limitante</th><th>La réalité</th></tr></thead>
+          <tbody>
+            <tr><td>"Le marché est saturé"</td><td>Il y a toujours de la place pour une boutique mieux optimisée. Amazon est saturé — pourtant des milliers de vendeurs y font des millions.</td></tr>
+            <tr><td>"J'ai pas assez de budget"</td><td>On peut lancer une campagne à 5€/jour. Le problème n'est pas le budget, c'est l'optimisation.</td></tr>
+            <tr><td>"Je suis pas technique"</td><td>Shopify a été conçu pour des non-techniciens. Si vous savez utiliser Instagram, vous savez utiliser Shopify.</td></tr>
+            <tr><td>"J'ai pas le temps"</td><td>3h/semaine suffisent pour gérer une boutique en phase de lancement. C'est moins que Netflix par semaine.</td></tr>
+            <tr><td>"Et si ça marche pas ?"</td><td>Et si ça marche ? Le risque d'essayer est bien inférieur au risque de ne jamais avoir essayé.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sh-icon">🕐</span>
+      <h3>Les 3 phases mentales du parcours</h3>
+      <span class="sh-badge">Roadmap</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Phase Enthousiasme (Jours 1–14)</h4>
+            <p>Vous êtes motivé, vous travaillez 12h/jour, vous êtes convaincu que ça va marcher. <strong>Danger :</strong> vous faites 10 choses en même temps. Focalisez-vous sur une seule tâche à la fois.</p>
+          </div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Phase Doute (Jours 15–45)</h4>
+            <p>Les résultats tardent. Vous vous demandez si ça vaut vraiment le coup. Les voisins vous regardent bizarrement. <strong>C'est ici que 80% abandonnent.</strong> Continuez. C'est la phase la plus importante.</p>
+          </div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Phase Momentum (Jours 46–90)</h4>
+            <p>Les premières ventes arrivent. L'algorithme Google commence à comprendre. Le SEO décolle. <strong>Ne changez rien au plan qui fonctionne.</strong> Doublez simplement ce qui marche.</p>
+          </div>
+        </div>
+      </div>
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-content">
+          <h4>La règle des 90 jours</h4>
+          <p>Commitez-vous sur 90 jours, point. Pas 30, pas 60. 90. Si après 90 jours de travail sérieux et régulier il n'y a absolument aucun signe de vie, alors et seulement alors, on réévalue. Dans 99% des cas, si vous avez vraiment travaillé 90 jours, vous voyez déjà les premières ventes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sh-icon">⚡</span>
+      <h3>Routine quotidienne du e-commerçant</h3>
+      <span class="sh-badge">Pratique</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <p class="body-text">La discipline bat la motivation sur le long terme. Voici la routine recommandée :</p>
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Matin (10 min)</strong> — Vérifier les ventes de la veille, le ROAS, et noter 1 observation dans votre journal de bord.</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Semaine (2-3h)</strong> — Exécuter les tâches planifiées : optimiser une campagne, publier un article, ajouter 5 produits.</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Dimanche (30 min)</strong> — Bilan hebdomadaire : CA, ROAS, top produits, décisions de la semaine suivante.</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Mensuel (1h)</strong> — Analyse complète : tendances, nouveaux concurrents, opportunités de produits, bilan financier.</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>En continu</strong> — 30 min/jour d'apprentissage : une vidéo, un article, un test. Les meilleurs ne s'arrêtent jamais d'apprendre.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sh-icon">🏆</span>
+      <h3>Ce qui sépare vraiment les 1% des autres</h3>
+      <span class="sh-badge">Secret</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="highlight-box">
+        <h3>🔑 La vraie différence</h3>
+        <p class="body-text" style="margin-top:12px">Ce n'est pas l'intelligence. Ce n'est pas le capital de départ. Ce n'est pas la chance. C'est une seule chose : <strong>l'exécution cohérente sur la durée.</strong></p>
+        <p class="body-text">Les e-commerçants qui font 100k€/mois ne sont pas plus brillants que vous. Ils ont juste continué quand les autres ont arrêté. Ils ont appliqué le plan quand c'était difficile. Ils ont optimisé systématiquement quand ça ne semblait pas urgent.</p>
+        <p class="body-text"><strong>Votre seule mission à partir d'aujourd'hui :</strong> suivre ce plan, semaine après semaine, sans sauter d'étapes, sans chercher des raccourcis. La formation que vous êtes en train de suivre contient tout ce qu'il faut. Le reste, c'est votre travail.</p>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="m-val">90</div><div class="m-label">Jours pour valider</div><div class="m-trend">Règle absolue</div></div>
+        <div class="metric"><div class="m-val">3h</div><div class="m-label">Par semaine min.</div><div class="m-trend">Suffisant pour démarrer</div></div>
+        <div class="metric"><div class="m-val">80%</div><div class="m-label">Abandonnent trop tôt</div><div class="m-trend">Ne soyez pas eux</div></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="complete-btn" onclick="completeModule('m1',this)">✓ Mindset verrouillé — On commence !</button>
+</div>
+
+<!-- MODULE 2 -->
+<div id="m2" class="module-page">
+  <div class="module-header">
+    <div class="module-tag">🧩 Module 2 · Comprendre</div>
     <h2>C'est quoi le <span class="gradient">e-commerce</span> exactement ?</h2>
     <p class="module-desc">Avant de vendre quoi que ce soit, il faut comprendre comment ça marche. Ce module vous explique le business model en langage simple, les différents types de boutiques en ligne, et pourquoi le modèle "mini-marque" est le meilleur pour démarrer.</p>
     <div class="module-meta"><div class="module-meta-item">⏱ 20 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div></div>
@@ -420,13 +860,13 @@ ul.body-list li { font-size:14px; color:var(--text2); line-height:1.8; margin-bo
     </div>
   </div>
 
-  <button class="complete-btn" onclick="completeModule('m1',this)">✓ Module compris, je continue</button>
+  <button class="complete-btn" onclick="completeModule('m2',this)">✓ Module compris, je continue</button>
 </div>
 
-<!-- MODULE 2 -->
-<div id="m2" class="module-page">
+<!-- MODULE 3 -->
+<div id="m3" class="module-page">
   <div class="module-header">
-    <div class="module-tag">🎯 Module 2 · Comprendre</div>
+    <div class="module-tag">🎯 Module 3 · Comprendre</div>
     <h2>Trouver sa <span class="gradient">niche gagnante</span></h2>
     <p class="module-desc">La niche, c'est le type de produit que vous allez vendre. C'est LA décision la plus importante. Un bon produit dans un bon marché se vend presque tout seul. Un mauvais produit, même avec le meilleur marketing du monde, ne décollera jamais.</p>
     <div class="module-meta"><div class="module-meta-item">⏱ 40 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div><div class="module-meta-item">🛠 Exercice inclus</div></div>
@@ -496,13 +936,13 @@ ul.body-list li { font-size:14px; color:var(--text2); line-height:1.8; margin-bo
     </div>
   </div>
 
-  <button class="complete-btn" onclick="completeModule('m2',this)">✓ Module compris, je continue</button>
+  <button class="complete-btn" onclick="completeModule('m3',this)">✓ Module compris, je continue</button>
 </div>
 
-<!-- MODULE 3 -->
-<div id="m3" class="module-page">
+<!-- MODULE 4 -->
+<div id="m4" class="module-page">
   <div class="module-header">
-    <div class="module-tag">📦 Module 3 · Comprendre</div>
+    <div class="module-tag">📦 Module 4 · Comprendre</div>
     <h2>Fournisseurs &amp; <span class="gradient">Produits</span></h2>
     <p class="module-desc">Maintenant que vous avez votre niche, il faut trouver où acheter les produits. Ce module vous montre exactement où chercher, comment négocier, et les pièges à éviter absolument.</p>
     <div class="module-meta"><div class="module-meta-item">⏱ 35 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div></div>
@@ -555,595 +995,13 @@ ul.body-list li { font-size:14px; color:var(--text2); line-height:1.8; margin-bo
     </div>
   </div>
 
-  <button class="complete-btn" onclick="completeModule('m3',this)">✓ Module compris, je continue</button>
-</div>
-
-<!-- MODULE 4 -->
-<div id="m4" class="module-page">
-  <div class="module-header">
-    <div class="module-tag">🛒 Module 4 · Construire</div>
-    <h2>Créer sa boutique <span class="gradient">Shopify en 48h</span></h2>
-    <p class="module-desc">C'est le moment de construire. Ce module vous guide clic par clic pour créer votre boutique complète. Pas besoin de savoir coder, pas besoin de designer — Shopify fait le gros du travail.</p>
-    <div class="module-meta"><div class="module-meta-item">⏱ 90 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div><div class="module-meta-item">💻 Pratique</div></div>
-  </div>
-
-  <h3 class="section-title">Jour 1 — Les fondations (3 heures)</h3>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Créer le compte Shopify</h4><p>Allez sur shopify.fr → "Démarrer l'essai gratuit". 3 jours gratuits puis 1€/mois pendant 3 mois. Choisissez le plan Basic (le moins cher). Vous aurez tout le temps d'upgrader plus tard.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Choisir le thème Dawn (gratuit)</h4><p>Online Store → Themes → "Dawn" de Shopify. C'est le thème gratuit le plus rapide et le mieux optimisé pour le SEO et Google Ads. Ne payez PAS de thème au début — Dawn suffit largement pour faire vos premiers 10k€/mois.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Configurer les informations de base</h4><p>Settings → General → Nom de la boutique, email, adresse. Settings → Payments → Activer Shopify Payments (Stripe intégré) + PayPal. Settings → Shipping → Configurer vos zones de livraison et tarifs.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Créer les pages légales obligatoires</h4><p>Settings → Policies → Shopify génère automatiquement les CGV, mentions légales, politique de remboursement et politique de confidentialité. Relisez et adaptez. C'est <strong>obligatoire</strong> pour vendre en France ET pour Google Merchant Center.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">5</div><div class="step-body"><h4>Acheter le nom de domaine</h4><p>Settings → Domains → "Buy new domain" ou connectez un domaine acheté sur OVH/Namecheap. Choisissez un .fr pour le marché français. Votre nom de domaine = votre nom de marque. Court, mémorisable, sans tirets.</p></div></div>
-  </div>
-
-  <h3 class="section-title">Jour 2 — Le contenu et les produits (3 heures)</h3>
-  <div class="steps">
-    <div class="step"><div class="step-num">6</div><div class="step-body"><h4>Ajouter vos 20–30 premiers produits</h4><p>Products → Add product. Pour chaque produit : titre clair, description de 150+ mots, 4–5 photos, prix, variantes (taille, couleur). Commencez avec 20–30 produits — vous ajouterez le reste progressivement.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">7</div><div class="step-body"><h4>Organiser en collections (catégories)</h4><p>Products → Collections. Créez 3–5 collections logiques. Exemple : "Sandales plates", "Sandales compensées", "Espadrilles", "Nouveautés", "Promotions". Chaque collection = une page que Google peut indexer.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">8</div><div class="step-body"><h4>Créer le menu de navigation</h4><p>Online Store → Navigation → Main menu. Structure simple : Accueil | Collections | Nouveautés | À propos | Contact. Un menu clair = un visiteur qui trouve ce qu'il cherche = plus de ventes.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">9</div><div class="step-body"><h4>Personnaliser le design</h4><p>Online Store → Customize. Ajoutez votre logo, changez les couleurs (restez sobre : 2 couleurs max), ajoutez une bannière d'accueil avec votre offre principale ("Livraison gratuite dès 50€").</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">10</div><div class="step-body"><h4>Installer les apps essentielles (5 max)</h4><p>Moins c'est mieux — chaque app ralentit le site. Les 5 essentielles : l'app Google Channel (pour Shopping), une app avis (Judge.me gratuit), une app SEO (SEO Manager ou gratuit Shopify), une app email (Klaviyo gratuit jusqu'à 250 contacts), et éventuellement une app fournisseur (DSers).</p></div></div>
-  </div>
-
-  <div class="callout tip">
-    <div class="callout-icon">🚀</div>
-    <div class="callout-content">
-      <h4>Votre boutique n'a pas besoin d'être parfaite pour lancer</h4>
-      <p>Un piège classique des débutants : passer 3 semaines à peaufiner le design au pixel près. Votre premier client se fiche de la police de caractères. Ce qui compte : des photos correctes, des prix clairs, un checkout qui fonctionne, et de la confiance (mentions légales, avis, réassurance). Lancez en 48h, améliorez ensuite.</p>
-    </div>
-  </div>
-
   <button class="complete-btn" onclick="completeModule('m4',this)">✓ Module compris, je continue</button>
 </div>
 
 <!-- MODULE 5 -->
 <div id="m5" class="module-page">
   <div class="module-header">
-    <div class="module-tag">📝 Module 5 · Construire</div>
-    <h2>Fiches produit <span class="gradient">qui vendent</span></h2>
-    <p class="module-desc">La fiche produit, c'est votre vendeur en ligne. Un bon vendeur convainc en 10 secondes. Une bonne fiche produit fait la même chose : elle rassure, elle donne envie, et elle pousse à l'achat.</p>
-    <div class="module-meta"><div class="module-meta-item">⏱ 45 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div><div class="module-meta-item">📝 Template inclus</div></div>
-  </div>
-
-  <h3 class="section-title">L'anatomie d'une fiche qui convertit</h3>
-  <div class="highlight-box">
-    <h3>Les 7 éléments d'une fiche produit parfaite</h3>
-    <div class="hb-grid">
-      <div class="hb-item"><div class="hb-icon">📸</div><h4>Photos (minimum 4)</h4><p>Photo face, photo détail, photo portée/en situation, photo packaging. Fond blanc pour Shopping, lifestyle pour le site.</p></div>
-      <div class="hb-item"><div class="hb-icon">🏷</div><h4>Titre clair</h4><p>"Sandales Plates Cuir Femme — Confort Été" Pas de référence, pas de code. Le client doit comprendre le produit en 2 secondes.</p></div>
-      <div class="hb-item"><div class="hb-icon">💶</div><h4>Prix + prix barré</h4><p>Affichez le prix barré si possible. "59€ <s>79€</s>" attire l'œil et crée le sentiment de bonne affaire.</p></div>
-      <div class="hb-item"><div class="hb-icon">✍️</div><h4>Description 200+ mots</h4><p>D'abord les BÉNÉFICES ("Confort toute la journée"), ensuite les caractéristiques techniques. Écrivez comme si vous parliez à un ami.</p></div>
-      <div class="hb-item"><div class="hb-icon">⭐</div><h4>Avis clients</h4><p>Même 5 avis suffisent au début. Demandez à vos premiers clients de laisser un avis en échange d'un code promo.</p></div>
-      <div class="hb-item"><div class="hb-icon">🛡</div><h4>Éléments de confiance</h4><p>"Livraison gratuite · Retours 30j · Paiement sécurisé" sous le bouton d'ajout au panier. Indispensable.</p></div>
-      <div class="hb-item"><div class="hb-icon">🛒</div><h4>Bouton d'achat visible</h4><p>Le bouton "Ajouter au panier" doit être visible SANS scroller sur mobile. Couleur contrastante, texte clair.</p></div>
-    </div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-header" onclick="toggleSection(this)">
-      <span class="sh-icon">✍️</span>
-      <h3>Template de description produit — Copiez et adaptez</h3>
-      <span class="sh-badge">Template</span>
-      <span class="arrow">▼</span>
-    </div>
-    <div class="section-body">
-      <div class="code-block">
-        <span class="code-lang">Template</span>
-PARAGRAPHE 1 — Le bénéfice principal (2-3 phrases)
-"Profitez d'un confort absolu du matin au soir avec nos [produit].
-Conçues en [matière] de qualité, elles [bénéfice principal] tout en
-vous offrant un style [adjectif] pour toutes les occasions."
-
-PARAGRAPHE 2 — Les caractéristiques (liste)
-• Matière : [cuir véritable / coton bio / etc.]
-• Taille : [disponible du 36 au 42]
-• Couleurs : [beige, noir, cognac]
-• Entretien : [facile, chiffon humide]
-
-PARAGRAPHE 3 — La réassurance (2 phrases)
-"Livraison gratuite en France sous 3-5 jours ouvrés.
-Pas satisfait ? Retour gratuit sous 30 jours, sans condition."
-      </div>
-      <div class="callout tip">
-        <div class="callout-icon">💡</div>
-        <div class="callout-content">
-          <h4>Le secret des descriptions qui vendent</h4>
-          <p>Ne décrivez pas le produit, décrivez ce que le client RESSENT en l'utilisant. "Semelle en caoutchouc antidérapant" → ennuyeux. "Marchez en confiance sur tous les terrains, même en bord de mer" → ça donne envie. Bénéfice &gt; Caractéristique, toujours.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-header" onclick="toggleSection(this)">
-      <span class="sh-icon">📸</span>
-      <h3>Les photos produit — Comment les faire gratuitement</h3>
-      <span class="sh-badge">Photos</span>
-      <span class="arrow">▼</span>
-    </div>
-    <div class="section-body">
-      <p class="body-text">Vous n'avez pas besoin d'un photographe professionnel. Un smartphone récent + lumière naturelle (près d'une fenêtre) + un fond blanc (feuille A3 ou drap blanc) suffisent pour des photos correctes. Mais si vous faites du dropshipping pur, utilisez les photos du fournisseur et améliorez-les :</p>
-      <ul class="checklist">
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Demandez les photos HD au fournisseur</strong> — Ils ont souvent des photos pros non disponibles sur le listing public. Un simple email suffit.</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Retouchez avec Canva (gratuit)</strong> — Supprimez le fond, ajoutez votre logo en watermark discret, améliorez la luminosité.</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Première photo = fond blanc</strong> (obligatoire pour Google Shopping). Photos suivantes = lifestyle/mise en situation.</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Taille minimum 800×800 pixels</strong> pour que le zoom fonctionne sur Shopify et que Google Shopping les accepte.</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Ajoutez une photo "taille réelle"</strong> — Le produit tenu en main ou porté donne une idée de la dimension. Réduit les retours de 20%.</span></li>
-      </ul>
-    </div>
-  </div>
-
-  <button class="complete-btn" onclick="completeModule('m5',this)">✓ Module compris, je continue</button>
-</div>
-
-<!-- MODULE 6 -->
-<div id="m6" class="module-page">
-  <div class="module-header">
-    <div class="module-tag">🔍 Module 6 · Comprendre Google</div>
-    <h2>SEO vs SEA — <span class="gradient">Le guide simple</span></h2>
-    <p class="module-desc">Google est la porte d'entrée principale de vos futurs clients. Il existe deux façons d'y apparaître : gratuitement (SEO) ou en payant (SEA). Ce module vous explique la différence et quand utiliser chacun.</p>
-    <div class="module-meta"><div class="module-meta-item">⏱ 30 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div></div>
-  </div>
-
-  <div class="callout beginner">
-    <div class="callout-icon">💬</div>
-    <div class="callout-content">
-      <h4>Imaginez Google comme un centre commercial</h4>
-      <p><strong>Le SEO</strong>, c'est avoir une boutique bien placée dans le centre — les gens vous trouvent naturellement en se promenant. Ça prend du temps à s'installer mais ensuite les clients viennent gratuitement. <strong>Le SEA</strong>, c'est payer un panneau publicitaire à l'entrée du centre. Les clients arrivent immédiatement, mais chaque visite vous coûte quelques centimes.</p>
-    </div>
-  </div>
-
-  <div class="card-grid">
-    <div class="card"><div class="card-icon">🌱</div><h3>SEO — Référencement naturel</h3><p><strong>Gratuit</strong> (pas de coût par clic) · Résultats en 3–6 mois · Trafic durable · Effort continu en contenu · 40–60% du trafic long terme · Travail d'écriture (fiches, blog) · <span class="tag green">Investissement long terme</span></p></div>
-    <div class="card"><div class="card-icon">🚀</div><h3>SEA — Google Ads (publicité)</h3><p><strong>Payant</strong> (0.20–1.50€ par clic) · Résultats en 24h · Trafic instantané · Besoin de budget continu · 60–80% du CA au début · Google Shopping + Search · <span class="tag orange">Résultats immédiats</span></p></div>
-  </div>
-
-  <div class="formula">
-    <div class="formula-label">La stratégie gagnante pour un débutant</div>
-    <div class="formula-eq">SEA immédiat <span class="op">+</span> SEO en parallèle <span class="op">=</span> CA court terme <span class="op">+</span> CA long terme</div>
-    <div class="formula-desc">Lancez Google Ads dès le jour 1 pour générer vos premières ventes (et collecter des données). En parallèle, travaillez votre SEO chaque semaine. En 6 mois, le SEO commence à générer du trafic gratuit qui réduit votre dépendance à la pub.</div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-header" onclick="toggleSection(this)">
-      <span class="sh-icon">🖥</span>
-      <h3>Anatomie d'une page de résultats Google — Où apparaître ?</h3>
-      <span class="sh-badge">Visuel</span>
-      <span class="arrow">▼</span>
-    </div>
-    <div class="section-body">
-      <div class="visual-guide">
-        <div class="vg-emoji">🖥</div>
-        <h4>Ce que voit votre client quand il tape "sandales femme" dans Google</h4>
-        <p>De haut en bas : les annonces Shopping (images produits avec prix) → les annonces texte Search (avec "Sponsorisé") → les résultats naturels SEO. Votre objectif : être visible dans les 3 zones.</p>
-      </div>
-      <table class="styled-table">
-        <thead><tr><th>Zone</th><th>Type</th><th>Comment y apparaître</th><th>Coût</th></tr></thead>
-        <tbody>
-          <tr><td>🛒 Shopping (en haut)</td><td>SEA</td><td>Google Merchant Center + campagne Shopping/PMax</td><td>0.15–0.80€ par clic</td></tr>
-          <tr><td>📝 Annonces texte</td><td>SEA</td><td>Campagne Search avec mots-clés ciblés</td><td>0.30–1.50€ par clic</td></tr>
-          <tr><td>🌐 Résultats naturels</td><td>SEO</td><td>Contenu optimisé, site rapide, backlinks</td><td>Gratuit (mais effort)</td></tr>
-          <tr><td>❓ "People Also Ask"</td><td>SEO</td><td>FAQ bien rédigées sur vos pages</td><td>Gratuit</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <button class="complete-btn" onclick="completeModule('m6',this)">✓ Module compris, je continue</button>
-</div>
-
-<!-- MODULE 7 -->
-<div id="m7" class="module-page">
-  <div class="module-header">
-    <div class="module-tag">🔑 Module 7 · Comprendre Google</div>
-    <h2>Les mots-clés <span class="gradient">pour les nuls</span></h2>
-    <p class="module-desc">Les "mots-clés", c'est simplement ce que les gens tapent dans Google. Comprendre quels mots vos futurs clients utilisent est la base de tout — que ce soit pour le SEO ou la pub Google.</p>
-    <div class="module-meta"><div class="module-meta-item">⏱ 40 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div><div class="module-meta-item">🛠 Exercice</div></div>
-  </div>
-
-  <h3 class="section-title">Comprendre l'intention : pourquoi les gens cherchent ?</h3>
-  <div class="card-grid">
-    <div class="card"><div class="card-icon">❓</div><h3>"Comment choisir des sandales"</h3><p>Cette personne <strong>s'informe</strong>. Elle n'est pas prête à acheter. → Pour votre blog (SEO). Pas pour la pub.</p></div>
-    <div class="card"><div class="card-icon">⚖️</div><h3>"Meilleures sandales femme 2025"</h3><p>Cette personne <strong>compare</strong>. Elle est presque prête. → Blog comparatif ou pub Google avec vos arguments.</p></div>
-    <div class="card"><div class="card-icon">💳</div><h3>"Acheter sandales cuir femme"</h3><p>Cette personne <strong>veut acheter maintenant</strong>. C'est votre client idéal. → Pub Google en priorité absolue.</p></div>
-  </div>
-
-  <div class="callout beginner">
-    <div class="callout-icon">🎯</div>
-    <div class="callout-content">
-      <h4>La règle d'or à retenir</h4>
-      <p>Plus le mot-clé est précis et long, plus la personne est proche de l'achat. "sandales" → vague. "acheter sandales plates cuir femme pas cher" → cette personne sort sa carte bleue. <strong>En pub, ciblez les mots longs et précis en premier.</strong> Ils coûtent moins cher et vendent plus.</p>
-    </div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-header" onclick="toggleSection(this)">
-      <span class="sh-icon">🛠</span>
-      <h3>Exercice : Trouver vos 20 premiers mots-clés (gratuit, 20 min)</h3>
-      <span class="sh-badge">Pratique</span>
-      <span class="arrow">▼</span>
-    </div>
-    <div class="section-body">
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Google Autocomplete — Le plus simple du monde</h4><p>Tapez votre produit dans Google mais n'appuyez PAS sur Entrée. Regardez les suggestions automatiques. Ce sont les recherches les plus fréquentes. Notez les 10 plus pertinentes.</p></div></div>
-        <div class="step-connector"></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><h4>"Recherches associées" en bas de page</h4><p>Tapez votre mot-clé principal et scrollez tout en bas de la page Google. Les "recherches associées" = d'autres mots-clés que vos clients potentiels utilisent. Notez-en 5–10 de plus.</p></div></div>
-        <div class="step-connector"></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Ubersuggest (gratuit, 3 recherches/jour)</h4><p>Allez sur neilpatel.com/ubersuggest → tapez votre mot-clé → Pays = France. Vous voyez le volume de recherche mensuel et le CPC estimé. Notez tous les mots avec 100+ recherches/mois.</p></div></div>
-        <div class="step-connector"></div>
-        <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Classez vos mots-clés par priorité</h4><p>Mettez une ⭐ à côté de chaque mot qui contient "acheter", "pas cher", "livraison", "meilleur" — ce sont ceux qui convertissent le mieux. Ce sera votre liste de départ pour Google Ads.</p></div></div>
-      </div>
-    </div>
-  </div>
-
-  <button class="complete-btn" onclick="completeModule('m7',this)">✓ Module compris, je continue</button>
-</div>
-
-<!-- MODULE 8 -->
-<div id="m8" class="module-page">
-  <div class="module-header">
-    <div class="module-tag">🎯 Module 8 · Premiers pas Ads</div>
-    <h2>Créer son <span class="gradient">compte Google Ads</span></h2>
-    <p class="module-desc">C'est le grand moment. Ce module vous guide étape par étape pour créer votre compte Google Ads et Google Merchant Center sans vous tromper. Chaque erreur de configuration au départ peut coûter des centaines d'euros. Suivez exactement les étapes.</p>
-    <div class="module-meta"><div class="module-meta-item">⏱ 60 min</div><div class="module-meta-item"><span class="level-badge level-medium">Technique</span></div><div class="module-meta-item">💻 Pratique</div></div>
-  </div>
-
-  <div class="callout warn">
-    <div class="callout-icon">⚠️</div>
-    <div class="callout-content">
-      <h4>IMPORTANT : Ne cliquez pas sur "Créer une campagne" quand Google le propose !</h4>
-      <p>Quand vous créez un compte Google Ads, Google vous pousse immédiatement à créer une campagne avec ses paramètres par défaut. Ces paramètres gaspillent votre budget. Choisissez <strong>"Passer"</strong> ou <strong>"Configurer sans campagne"</strong> à chaque fois. On créera la campagne nous-mêmes dans le module suivant.</p>
-    </div>
-  </div>
-
-  <h3 class="section-title">Étape 1 — Google Merchant Center</h3>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Créer le compte Merchant Center</h4><p>Allez sur merchants.google.com → "Commencer". Utilisez le même compte Gmail que pour Google Ads. Renseignez le nom de votre boutique et l'URL de votre site Shopify.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Vérifier et revendiquer votre site</h4><p>GMC vous demande de prouver que le site est à vous. La méthode la plus simple : ajoutez la balise meta HTML dans votre theme.liquid (Online Store → Themes → Edit Code → theme.liquid → collez la balise dans le &lt;head&gt;).</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Connecter Shopify à Merchant Center</h4><p>Installez l'app "Google & YouTube" sur Shopify (gratuite, officielle Google). Elle synchronise automatiquement vos produits avec Merchant Center. Suivez le setup de l'app — c'est guidé.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Configurer les frais de port dans GMC</h4><p>Merchant Center → Shipping & Returns → Ajoutez vos tarifs de livraison EXACTEMENT comme sur votre site Shopify. Si les prix ne correspondent pas, Google refuse vos produits.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">5</div><div class="step-body"><h4>Attendre la validation du flux</h4><p>Google vérifie vos produits. Ça prend 24 à 72h. Vérifiez l'onglet "Diagnostics" pour voir s'il y a des erreurs à corriger. Zéro erreur critique = vous êtes prêt pour les campagnes Shopping.</p></div></div>
-  </div>
-
-  <h3 class="section-title">Étape 2 — Compte Google Ads</h3>
-  <div class="steps">
-    <div class="step"><div class="step-num">6</div><div class="step-body"><h4>Créer le compte Google Ads</h4><p>ads.google.com → "Commencer" → IGNOREZ la création de campagne → mode "Expert" (pas le mode simplifié). Le mode simplifié cache les options importantes dont vous aurez besoin.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">7</div><div class="step-body"><h4>Lier Google Ads à Merchant Center</h4><p>Dans Google Ads → Outils → Comptes associés → Google Merchant Center → Associer. C'est ce lien qui permet de diffuser vos produits en Shopping.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">8</div><div class="step-body"><h4>Configurer le suivi des conversions</h4><p>C'est l'étape la plus technique mais la plus importante. Installez l'app "Google & YouTube" de Shopify — elle configure automatiquement le tracking des achats. Vérifiez dans Google Ads → Outils → Conversions qu'une conversion "Purchase" apparaît.</p></div></div>
-  </div>
-
-  <div class="callout tip">
-    <div class="callout-icon">💡</div>
-    <div class="callout-content">
-      <h4>Vérification avant de continuer</h4>
-      <p>Avant de passer au module suivant, vérifiez que : Merchant Center affiche vos produits sans erreur critique, Google Ads est en mode Expert (pas simplifié), et le suivi de conversion "Purchase" est actif. Si l'un de ces 3 points n'est pas OK, ne lancez pas de campagne — corrigez d'abord.</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" onclick="completeModule('m8',this)">✓ Module compris, je continue</button>
-</div>
-
-<!-- MODULE 9 -->
-<div id="m9" class="module-page">
-  <div class="module-header">
-    <div class="module-tag">💰 Module 9 · Premiers pas Ads</div>
-    <h2>Lancer sa <span class="gradient">première campagne Shopping</span></h2>
-    <p class="module-desc">C'est le moment de vérité. Vous allez créer votre première campagne et voir vos produits apparaître dans Google Shopping. Suivez chaque étape exactement comme décrit — chaque paramètre compte.</p>
-    <div class="module-meta"><div class="module-meta-item">⏱ 45 min</div><div class="module-meta-item"><span class="level-badge level-medium">Technique</span></div><div class="module-meta-item">💰 Premier budget</div></div>
-  </div>
-
-  <div class="callout beginner">
-    <div class="callout-icon">🎯</div>
-    <div class="callout-content">
-      <h4>On lance quoi exactement ?</h4>
-      <p>Une campagne <strong>Performance Max</strong>. C'est le type de campagne recommandé par Google pour le e-commerce. Elle affiche vos produits dans Google Shopping (les images avec les prix) automatiquement. C'est la campagne la plus simple à configurer ET la plus rentable pour un débutant.</p>
-    </div>
-  </div>
-
-  <h3 class="section-title">Création pas-à-pas</h3>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Google Ads → + Nouvelle campagne → Ventes</h4><p>Objectif = "Ventes". Google optimisera pour les achats. Ne choisissez jamais "Trafic" ou "Notoriété" pour du e-commerce — vous voulez des ventes, pas des visiteurs touristiques.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Type de campagne → Performance Max</h4><p>Sélectionnez votre compte Merchant Center associé. Google affichera la liste de vos produits. Gardez tous les produits pour commencer (on affinera après).</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Budget → 10 à 15€ par jour pour commencer</h4><p>C'est le minimum pour que Google ait assez de données pour apprendre. Moins de 10€/jour = trop lent, vous attendrez des semaines sans résultats significatifs. 15€/jour = ~450€/mois, un investissement raisonnable pour tester.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Stratégie d'enchères → Maximiser la valeur de conversion</h4><p>Pour commencer, choisissez "Maximiser la valeur de conversion" SANS cible ROAS. Laissez Google apprendre seul pendant les 2–4 premières semaines. On ajoutera une cible ROAS quand on aura assez de données (module 12).</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">5</div><div class="step-body"><h4>Ciblage → France uniquement</h4><p>Langues : Français. Localisation : France. Décochez les options d'expansion automatique. On reste concentré sur un marché pour commencer.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">6</div><div class="step-body"><h4>Groupe d'assets → Laissez vide pour commencer (Feed-Only)</h4><p>Ne remplissez PAS les images, vidéos et textes marketing. En laissant vide, Google diffuse uniquement en Shopping avec vos fiches produit. C'est la méthode "Feed-Only" — la plus rentable pour un débutant car 100% du budget va sur Shopping.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">7</div><div class="step-body"><h4>Lancez et NE TOUCHEZ À RIEN pendant 14 jours</h4><p>Sérieusement. La tentation de modifier après 3 jours est énorme. Résistez. Google a besoin de 14 jours minimum pour apprendre. Chaque modification remet le compteur à zéro. Observez, notez, mais ne changez rien.</p></div></div>
-  </div>
-
-  <div class="callout warn">
-    <div class="callout-icon">⏰</div>
-    <div class="callout-content">
-      <h4>Attendez-vous à perdre de l'argent les 2 premières semaines</h4>
-      <p>C'est normal. Considérez ces 150–300€ comme un investissement en données. Google apprend quels produits intéressent les gens, à quelle heure, sur quel appareil. Ces données sont précieuses et vont rendre les semaines suivantes rentables. Les débutants qui paniquent et coupent après 5 jours recommencent éternellement à zéro.</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" onclick="completeModule('m9',this)">✓ Module compris, je continue</button>
-</div>
-
-<!-- MODULE 10 -->
-<div id="m10" class="module-page">
-  <div class="module-header">
-    <div class="module-tag">📊 Module 10 · Premiers pas Ads</div>
-    <h2>Lire ses <span class="gradient">résultats — Le tableau de bord</span></h2>
-    <p class="module-desc">Votre campagne tourne depuis 14 jours. Il est temps de comprendre les chiffres. Ce module traduit le jargon Google Ads en français simple et vous apprend à identifier ce qui fonctionne et ce qui ne fonctionne pas.</p>
-    <div class="module-meta"><div class="module-meta-item">⏱ 40 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div><div class="module-meta-item">📊 Lecture de données</div></div>
-  </div>
-
-  <h3 class="section-title">Les 8 chiffres à comprendre (et uniquement ceux-là au début)</h3>
-  <table class="styled-table">
-    <thead><tr><th>Terme</th><th>Ce que ça veut dire</th><th>Bon chiffre</th><th>Mauvais chiffre</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Impressions</strong></td><td>Combien de fois votre annonce a été vue</td><td>1000+/jour</td><td>&lt;100/jour (produits mal ciblés)</td></tr>
-      <tr><td><strong>Clics</strong></td><td>Combien de personnes ont cliqué</td><td>50+/jour avec 15€ budget</td><td>&lt;10/jour (annonces pas attractives)</td></tr>
-      <tr><td><strong>CTR</strong></td><td>% de gens qui voient et cliquent</td><td>&gt;1% en Shopping</td><td>&lt;0.5% (photos/prix à revoir)</td></tr>
-      <tr><td><strong>CPC</strong></td><td>Coût par clic (ce que vous payez)</td><td>0.15–0.60€</td><td>&gt;1€ (niche trop compétitive ?)</td></tr>
-      <tr><td><strong>Conversions</strong></td><td>Nombre de ventes</td><td>1+/jour avec 15€</td><td>0 après 14 jours (problème)</td></tr>
-      <tr><td><strong>Taux conversion</strong></td><td>% de cliqueurs qui achètent</td><td>&gt;2%</td><td>&lt;0.5% (problème sur le site)</td></tr>
-      <tr><td><strong>Coût / conversion</strong></td><td>Combien coûte chaque vente en pub</td><td>&lt;30% du prix de vente</td><td>&gt;50% du prix (pas rentable)</td></tr>
-      <tr><td><strong>ROAS</strong></td><td>Revenu pub / Dépense pub</td><td>&gt;3× (vous gagnez de l'argent)</td><td>&lt;2× (vous perdez de l'argent)</td></tr>
-    </tbody>
-  </table>
-
-  <div class="callout beginner">
-    <div class="callout-icon">💡</div>
-    <div class="callout-content">
-      <h4>Le ROAS en ultra-simple</h4>
-      <p>Si vous dépensez 100€ en pub et que ça génère 400€ de ventes, votre ROAS = 4×. Avec 40% de marge, ça fait 160€ de marge brute − 100€ de pub = <strong>60€ de profit net</strong>. Tant que le ROAS est supérieur à votre ROAS break-even (en général 2.5–3×), vous gagnez de l'argent.</p>
-    </div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-header" onclick="toggleSection(this)">
-      <span class="sh-icon">🔍</span>
-      <h3>Diagnostic : Que faire selon vos résultats après 14 jours ?</h3>
-      <span class="sh-badge">Diagnostic</span>
-      <span class="arrow">▼</span>
-    </div>
-    <div class="section-body">
-      <div class="card-grid">
-        <div class="card"><div class="card-icon">✅</div><h3>ROAS &gt; 3× → Excellent</h3><p>Vous êtes rentable. Ne changez rien. Augmentez le budget de 20% par semaine et passez au module 12 pour optimiser davantage.</p></div>
-        <div class="card"><div class="card-icon">⚠️</div><h3>ROAS entre 2× et 3× → Correct</h3><p>Vous êtes au break-even ou légèrement positif. Regardez quels produits vendent le mieux et concentrez le budget dessus. Passez au module 12.</p></div>
-        <div class="card"><div class="card-icon">🔻</div><h3>ROAS &lt; 2× → Pas encore rentable</h3><p>Normal au début. Vérifiez : vos prix sont-ils compétitifs ? Vos photos sont-elles attractives ? Votre site est-il rapide sur mobile ? Corrigez, puis relancez 14 jours.</p></div>
-        <div class="card"><div class="card-icon">❌</div><h3>0 vente après 14 jours → Problème</h3><p>Vérifiez en urgence : le tracking de conversion fonctionne-t-il ? (faites un achat test). Vos produits sont-ils visibles dans Shopping ? Votre prix est-il trop élevé vs la concurrence ?</p></div>
-      </div>
-    </div>
-  </div>
-
-  <button class="complete-btn" onclick="completeModule('m10',this)">✓ Module compris, je continue</button>
-</div>
-
-<!-- MODULE 11 -->
-<div id="m11" class="module-page">
-  <div class="module-header">
-    <div class="module-tag">🌱 Module 11 · Objectif 10k€</div>
-    <h2>SEO pour <span class="gradient">débutants</span></h2>
-    <p class="module-desc">Le SEO, c'est votre investissement long terme. Chaque page optimisée, chaque article publié est une graine qui donnera du trafic gratuit pendant des mois voire des années. Ce module vous donne les bases absolues, sans jargon.</p>
-    <div class="module-meta"><div class="module-meta-item">⏱ 50 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div></div>
-  </div>
-
-  <h3 class="section-title">Les 5 choses que Google regarde pour classer votre site</h3>
-  <div class="card-grid">
-    <div class="card"><div class="card-icon">📝</div><h3>1. Le contenu de vos pages</h3><p>Est-ce que votre page parle de ce que le client cherche ? Si quelqu'un tape "sandales cuir femme", votre page doit contenir ces mots naturellement dans le titre, la description, les H1...</p></div>
-    <div class="card"><div class="card-icon">⚡</div><h3>2. La vitesse de votre site</h3><p>Un site lent = Google vous pénalise. Testez votre vitesse sur pagespeed.web.dev. Objectif : score &gt;60 sur mobile. Réduisez la taille des images, supprimez les apps inutiles.</p></div>
-    <div class="card"><div class="card-icon">📱</div><h3>3. L'expérience mobile</h3><p>65% des visites viennent du téléphone. Si votre site est moche ou difficile à utiliser sur mobile, Google vous classe en bas. Testez votre boutique sur votre propre téléphone.</p></div>
-    <div class="card"><div class="card-icon">🔗</div><h3>4. Les liens vers votre site</h3><p>Quand d'autres sites font un lien vers le vôtre, Google considère que vous êtes "recommandé". Plus vous avez de liens de qualité, plus vous montez dans les résultats.</p></div>
-    <div class="card"><div class="card-icon">🏗</div><h3>5. La structure du site</h3><p>Google doit pouvoir "lire" votre site facilement. Des titres clairs (H1, H2), des URLs propres (/collections/sandales-plates vs /collections/12345), et un menu logique.</p></div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-header" onclick="toggleSection(this)">
-      <span class="sh-icon">✅</span>
-      <h3>Actions SEO concrètes à faire cette semaine (30 min)</h3>
-      <span class="sh-badge">Actions</span>
-      <span class="arrow">▼</span>
-    </div>
-    <div class="section-body">
-      <ul class="checklist">
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Réécrivez les titres de vos 10 meilleurs produits</strong> avec le mot-clé que le client taperait. "Ref-2845" → "Sandales Plates Cuir Femme — Été 2025"</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Ajoutez un texte de 200 mots sur chaque page collection</strong> (catégorie). Au-dessus des produits, pas en dessous. Incluez votre mot-clé principal naturellement.</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Remplissez les alt des images</strong> (Shopify → produit → cliquez sur l'image → "alt text"). Décrivez l'image : "Sandales plates cuir beige femme portées été".</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Inscrivez votre site sur Google Search Console</strong> (search.google.com/search-console). C'est gratuit. Google vous montrera pour quels mots-clés votre site apparaît.</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Écrivez et publiez 1 article de blog</strong> sur votre thématique. 800+ mots, répondant à une question que vos clients se posent. Ex : "Comment choisir des sandales confortables pour marcher longtemps".</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Ajoutez 3 FAQ sur chaque fiche produit</strong>. Questions/réponses réelles. Google les affiche parfois directement dans les résultats → plus de clics gratuits.</span></li>
-      </ul>
-    </div>
-  </div>
-
-  <button class="complete-btn" onclick="completeModule('m11',this)">✓ Module compris, je continue</button>
-</div>
-
-<!-- MODULE 12 -->
-<div id="m12" class="module-page">
-  <div class="module-header">
-    <div class="module-tag">📈 Module 12 · Objectif 10k€</div>
-    <h2>Premières <span class="gradient">optimisations</span></h2>
-    <p class="module-desc">Votre campagne tourne, vous avez vos premières ventes. Maintenant, chaque petite amélioration peut doubler vos résultats. Ce module vous montre les optimisations les plus simples et les plus rentables à faire dès maintenant.</p>
-    <div class="module-meta"><div class="module-meta-item">⏱ 50 min</div><div class="module-meta-item"><span class="level-badge level-medium">Intermédiaire</span></div></div>
-  </div>
-
-  <h3 class="section-title">Les 5 optimisations à faire en premier (par ordre d'impact)</h3>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Optimisez les titres de votre flux produit</h4><p>C'est l'optimisation #1 en Shopping. Allez dans Shopify, modifiez les titres de vos 20 produits les plus vus pour inclure le mot-clé que les clients tapent. "[Marque] + [Type produit] + [Caractéristique] + [Genre]". Impact : CTR Shopping × 2 en 1–2 semaines.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Coupez les produits qui perdent de l'argent</h4><p>Dans Google Ads → Produits → Regardez quels produits ont eu 30+ clics et 0 vente. Excluez-les de votre campagne PMax (via un custom label ou un filtre produit). Votre budget se concentre sur ce qui vend.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Ajoutez une cible ROAS (si 30+ ventes)</h4><p>Après 30 conversions, ajoutez un Target ROAS dans les paramètres de campagne. Mettez-le à -20% de votre ROAS actuel. Si votre ROAS actuel est 4×, mettez le Target à 3.2×. Google optimise plus intelligemment avec cette cible.</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Améliorez les photos des produits qui ont un bon nombre d'impressions mais peu de clics</h4><p>Beaucoup d'impressions + peu de clics = les gens voient votre produit mais ne cliquent pas. Le problème est souvent la photo (pas assez attractive) ou le prix (trop cher vs concurrents affichés à côté).</p></div></div>
-    <div class="step-connector"></div>
-    <div class="step"><div class="step-num">5</div><div class="step-body"><h4>Ajoutez des éléments de confiance sur votre site</h4><p>Si vos clics ne convertissent pas (beaucoup de visiteurs, peu de ventes), le problème est votre site. Ajoutez : avis clients, badges de confiance, photos de meilleure qualité, page "À propos" crédible, numéro de téléphone visible.</p></div></div>
-  </div>
-
-  <div class="callout tip">
-    <div class="callout-icon">📅</div>
-    <div class="callout-content">
-      <h4>Votre routine hebdomadaire (20 minutes chaque dimanche)</h4>
-      <p><strong>5 min :</strong> Regardez votre ROAS de la semaine. En hausse ou en baisse ? <strong>5 min :</strong> Vérifiez les produits les plus cliqués sans vente → excluez si 50+ clics. <strong>5 min :</strong> Notez votre CA, dépenses, et profit dans un Google Sheet. <strong>5 min :</strong> Lisez un article de blog ou regardez une vidéo pour apprendre un truc nouveau. C'est tout. 20 minutes suffisent au début.</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" onclick="completeModule('m12',this)">✓ Module compris, je continue</button>
-</div>
-
-<!-- MODULE 13 -->
-<div id="m13" class="module-page">
-  <div class="module-header">
-    <div class="module-tag">📧 Module 13 · Objectif 10k€</div>
-    <h2>Email &amp; <span class="gradient">Fidélisation</span></h2>
-    <p class="module-desc">Acquérir un nouveau client coûte 5 à 7 fois plus cher que de vendre à un client existant. L'email marketing vous permet de garder le contact avec vos acheteurs et de les faire revenir — gratuitement.</p>
-    <div class="module-meta"><div class="module-meta-item">⏱ 40 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div></div>
-  </div>
-
-  <h3 class="section-title">Les 3 emails automatiques à configurer dès maintenant</h3>
-  <p class="body-text">Installez Klaviyo (gratuit jusqu'à 250 contacts) ou l'email natif de Shopify. Ces 3 emails se déclenchent automatiquement et travaillent pour vous 24/7 :</p>
-
-  <div class="card-grid">
-    <div class="card"><div class="card-icon">🛒</div><h3>1. Abandon de panier</h3><p><strong>Quand :</strong> quelqu'un met un produit dans le panier et part sans acheter.<br><strong>Email 1 (1h après) :</strong> "Votre panier vous attend"<br><strong>Email 2 (24h après) :</strong> "Toujours intéressé ? Livraison offerte aujourd'hui"<br><strong>Impact :</strong> récupère 10–15% des paniers abandonnés. Sur 100 paniers abandonnés par mois, c'est 10–15 ventes gratuites.</p></div>
-    <div class="card"><div class="card-icon">👋</div><h3>2. Bienvenue nouveau client</h3><p><strong>Quand :</strong> quelqu'un s'inscrit à votre newsletter (pop-up -10%).<br><strong>Email 1 (immédiat) :</strong> code promo + présentation de la marque<br><strong>Email 2 (J+3) :</strong> vos best-sellers<br><strong>Impact :</strong> convertit 8–15% des inscrits en acheteurs.</p></div>
-    <div class="card"><div class="card-icon">📦</div><h3>3. Post-achat</h3><p><strong>Quand :</strong> le client a reçu sa commande (J+7).<br><strong>Email :</strong> "Comment se passent vos [produit] ? Laissez un avis et recevez -10% sur votre prochaine commande."<br><strong>Impact :</strong> génère des avis (crucial pour la confiance) + encourage le réachat.</p></div>
-  </div>
-
-  <div class="callout tip">
-    <div class="callout-icon">💡</div>
-    <div class="callout-content">
-      <h4>Le pop-up qui change tout</h4>
-      <p>Ajoutez un pop-up sur votre site : "Recevez -10% sur votre première commande" en échange de l'email. Taux de capture moyen : 3–5% des visiteurs. Sur 1 000 visiteurs/mois, c'est 30–50 emails collectés. En 6 mois, vous avez une liste de 200–300 contacts qui reçoivent vos promotions gratuitement. C'est votre assurance-vie si les CPC Google augmentent.</p>
-    </div>
-  </div>
-
-  <button class="complete-btn" onclick="completeModule('m13',this)">✓ Module compris, je continue</button>
-</div>
-
-<!-- MODULE 14 -->
-<div id="m14" class="module-page">
-  <div class="module-header">
-    <div class="module-tag">🚀 Module 14 · Objectif 10k€</div>
-    <h2>Roadmap <span class="gradient">0 → 10 000€/mois</span></h2>
-    <p class="module-desc">Ce dernier module synthétise tout en un plan d'action semaine par semaine. Imprimez-le, affichez-le au-dessus de votre bureau, et cochez chaque étape. Dans 90 jours, votre boutique sera méconnaissable.</p>
-    <div class="module-meta"><div class="module-meta-item">⏱ 30 min</div><div class="module-meta-item">🎯 Plan d'action</div></div>
-  </div>
-
-  <h3 class="section-title">Semaine par semaine — Votre plan de vol</h3>
-
-  <div class="section-block">
-    <div class="section-header open" onclick="toggleSection(this)">
-      <span class="sh-icon">📅</span>
-      <h3>Semaines 1–2 : Construction (0€ de CA — c'est normal)</h3>
-      <span class="sh-badge">Setup</span>
-      <span class="arrow">▼</span>
-    </div>
-    <div class="section-body open">
-      <ul class="checklist">
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Niche validée avec Google Trends + Google Shopping (Module 2)</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">2–3 fournisseurs identifiés, échantillons commandés (Module 3)</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Boutique Shopify live avec 20–30 produits (Module 4)</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Fiches produit rédigées avec 4+ photos et descriptions 200+ mots (Module 5)</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Google Merchant Center configuré et validé (Module 8)</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Google Ads configuré avec suivi de conversion actif (Module 8)</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Pop-up email installé pour capturer les emails (Module 13)</span></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-header" onclick="toggleSection(this)">
-      <span class="sh-icon">📅</span>
-      <h3>Semaines 3–4 : Première campagne (premières ventes attendues)</h3>
-      <span class="sh-badge">Lancement</span>
-      <span class="arrow">▼</span>
-    </div>
-    <div class="section-body">
-      <ul class="checklist">
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Campagne PMax Feed-Only lancée à 10–15€/jour (Module 9)</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">NE RIEN TOUCHER pendant 14 jours (discipline !)</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Email abandon panier + bienvenue configurés (Module 13)</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">2 articles de blog publiés (Module 11)</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Google Search Console configuré (Module 11)</span></li>
-      </ul>
-      <div class="metrics">
-        <div class="metric"><div class="m-val">300€</div><div class="m-label">Budget pub mois 1</div><div class="m-trend">Phase d'apprentissage</div></div>
-        <div class="metric"><div class="m-val">5–15</div><div class="m-label">Ventes attendues</div><div class="m-trend">Ne pas paniquer si &lt;5</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-header" onclick="toggleSection(this)">
-      <span class="sh-icon">📅</span>
-      <h3>Semaines 5–8 : Optimisation (objectif 2 000–3 000€/mois CA)</h3>
-      <span class="sh-badge">Croissance</span>
-      <span class="arrow">▼</span>
-    </div>
-    <div class="section-body">
-      <ul class="checklist">
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Premières optimisations appliquées (Module 12) : titres flux, produits exclus, cible ROAS</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Budget augmenté à 20–30€/jour si ROAS &gt; 2.5×</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">20 produits supplémentaires ajoutés au catalogue</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">4 articles de blog supplémentaires publiés</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">10+ avis clients collectés (demandez activement !)</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Routine hebdomadaire du dimanche installée (20 min/semaine)</span></li>
-      </ul>
-      <div class="metrics">
-        <div class="metric"><div class="m-val">600€</div><div class="m-label">Budget pub mois 2</div><div class="m-trend">Si ROAS positif</div></div>
-        <div class="metric"><div class="m-val">2–3k€</div><div class="m-label">CA mensuel cible</div><div class="m-trend">+SEO qui démarre</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-header" onclick="toggleSection(this)">
-      <span class="sh-icon">📅</span>
-      <h3>Mois 3–6 : Scaling (objectif 5 000 → 10 000€/mois CA)</h3>
-      <span class="sh-badge">Scale</span>
-      <span class="arrow">▼</span>
-    </div>
-    <div class="section-body">
-      <ul class="checklist">
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Budget augmenté à 50–80€/jour (+20% par semaine max)</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Catalogue porté à 100–200 produits</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Campagne Search lancée sur vos best-sellers (en plus de PMax)</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">SEO : premières positions organiques sur les mots-clés longue traîne</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Email marketing : 100+ contacts, flows automatiques actifs</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Premiers fournisseurs européens contactés pour réduire les délais</span></li>
-        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Passage à la <strong>Formation Avancée</strong> pour continuer vers 50k€ puis 100k€/mois</span></li>
-      </ul>
-      <div class="metrics">
-        <div class="metric"><div class="m-val">1.5k€</div><div class="m-label">Budget pub mois 3–6</div><div class="m-trend">Croissance progressive</div></div>
-        <div class="metric"><div class="m-val">10k€</div><div class="m-label">CA mensuel cible</div><div class="m-trend">Objectif atteint</div></div>
-        <div class="metric"><div class="m-val">3–4k€</div><div class="m-label">Profit net estimé</div><div class="m-trend">Marge 30–40%</div></div>
-      </div>
-    </div>
-  </div>
-
-  <button class="complete-btn" onclick="completeModule('m14',this)">✓ Module compris, je continue</button>
-</div>
-
-<!-- MODULE 15 -->
-<div id="m15" class="module-page">
-  <div class="module-header">
-    <div class="module-tag">📋 Module 15 · Juridique & Admin</div>
+    <div class="module-tag">📋 Module 5 · Juridique & Admin</div>
     <h2>Créer <span class="gradient">son entreprise</span></h2>
     <p class="module-desc">Avant de scaler ou même dès vos premières ventes, vous devez être en règle. Ce module vous guide pas-à-pas pour choisir le bon statut, déclarer votre activité, gérer la TVA et respecter les obligations légales du e-commerce. Pas besoin d'être juriste — on vous explique tout simplement.</p>
     <div class="module-meta"><div class="module-meta-item">⏱ 45 min</div><div class="module-meta-item">📋 Administratif</div><div class="module-meta-item">🇫🇷 Droit français</div></div>
@@ -1409,26 +1267,1022 @@ Pas satisfait ? Retour gratuit sous 30 jours, sans condition."
     </div>
   </div>
 
-  <div class="highlight-box" style="margin-top:40px;">
-    <h3>🎉 Vous avez terminé la formation !</h3>
-    <p class="body-text" style="margin-top:12px;">Vous avez maintenant tout ce qu'il faut pour lancer votre première boutique e-commerce rentable ET en toute légalité. Pas besoin de tout savoir pour commencer — il suffit de suivre le plan semaine par semaine. Les entrepreneurs qui réussissent ne sont pas les plus intelligents, ce sont ceux qui passent à l'action.</p>
-    <p class="body-text"><strong>Prochaine étape :</strong> quand vous atteignez les 10 000€/mois de CA, passez à la <strong>Formation Elite SEA/SEO (18 modules)</strong> pour viser les 50k€, 100k€ et le million d'euros.</p>
+
+
+  <button class="complete-btn" onclick="completeModule('m5',this)">✓ Module compris, je continue</button>
+</div>
+
+<!-- MODULE 6 -->
+<div id="m6" class="module-page">
+  <div class="module-header">
+    <div class="module-tag">🛒 Module 6 · Construire</div>
+    <h2>Créer sa boutique <span class="gradient">Shopify en 48h</span></h2>
+    <p class="module-desc">C'est le moment de construire. Ce module vous guide clic par clic pour créer votre boutique complète. Pas besoin de savoir coder, pas besoin de designer — Shopify fait le gros du travail.</p>
+    <div class="module-meta"><div class="module-meta-item">⏱ 90 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div><div class="module-meta-item">💻 Pratique</div></div>
   </div>
 
-  <button class="complete-btn" onclick="completeModule('m15',this)">✓ Formation terminée — Passez à l'action !</button>
+  <h3 class="section-title">Jour 1 — Les fondations (3 heures)</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Créer le compte Shopify</h4><p>Allez sur shopify.fr → "Démarrer l'essai gratuit". 3 jours gratuits puis 1€/mois pendant 3 mois. Choisissez le plan Basic (le moins cher). Vous aurez tout le temps d'upgrader plus tard.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Choisir le thème Dawn (gratuit)</h4><p>Online Store → Themes → "Dawn" de Shopify. C'est le thème gratuit le plus rapide et le mieux optimisé pour le SEO et Google Ads. Ne payez PAS de thème au début — Dawn suffit largement pour faire vos premiers 10k€/mois.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Configurer les informations de base</h4><p>Settings → General → Nom de la boutique, email, adresse. Settings → Payments → Activer Shopify Payments (Stripe intégré) + PayPal. Settings → Shipping → Configurer vos zones de livraison et tarifs.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Créer les pages légales obligatoires</h4><p>Settings → Policies → Shopify génère automatiquement les CGV, mentions légales, politique de remboursement et politique de confidentialité. Relisez et adaptez. C'est <strong>obligatoire</strong> pour vendre en France ET pour Google Merchant Center.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><h4>Acheter le nom de domaine</h4><p>Settings → Domains → "Buy new domain" ou connectez un domaine acheté sur OVH/Namecheap. Choisissez un .fr pour le marché français. Votre nom de domaine = votre nom de marque. Court, mémorisable, sans tirets.</p></div></div>
+  </div>
+
+  <h3 class="section-title">Jour 2 — Le contenu et les produits (3 heures)</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">6</div><div class="step-body"><h4>Ajouter vos 20–30 premiers produits</h4><p>Products → Add product. Pour chaque produit : titre clair, description de 150+ mots, 4–5 photos, prix, variantes (taille, couleur). Commencez avec 20–30 produits — vous ajouterez le reste progressivement.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">7</div><div class="step-body"><h4>Organiser en collections (catégories)</h4><p>Products → Collections. Créez 3–5 collections logiques. Exemple : "Sandales plates", "Sandales compensées", "Espadrilles", "Nouveautés", "Promotions". Chaque collection = une page que Google peut indexer.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">8</div><div class="step-body"><h4>Créer le menu de navigation</h4><p>Online Store → Navigation → Main menu. Structure simple : Accueil | Collections | Nouveautés | À propos | Contact. Un menu clair = un visiteur qui trouve ce qu'il cherche = plus de ventes.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">9</div><div class="step-body"><h4>Personnaliser le design</h4><p>Online Store → Customize. Ajoutez votre logo, changez les couleurs (restez sobre : 2 couleurs max), ajoutez une bannière d'accueil avec votre offre principale ("Livraison gratuite dès 50€").</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">10</div><div class="step-body"><h4>Installer les apps essentielles (5 max)</h4><p>Moins c'est mieux — chaque app ralentit le site. Les 5 essentielles : l'app Google Channel (pour Shopping), une app avis (Judge.me gratuit), une app SEO (SEO Manager ou gratuit Shopify), une app email (Klaviyo gratuit jusqu'à 250 contacts), et éventuellement une app fournisseur (DSers).</p></div></div>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-icon">🚀</div>
+    <div class="callout-content">
+      <h4>Votre boutique n'a pas besoin d'être parfaite pour lancer</h4>
+      <p>Un piège classique des débutants : passer 3 semaines à peaufiner le design au pixel près. Votre premier client se fiche de la police de caractères. Ce qui compte : des photos correctes, des prix clairs, un checkout qui fonctionne, et de la confiance (mentions légales, avis, réassurance). Lancez en 48h, améliorez ensuite.</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" onclick="completeModule('m6',this)">✓ Module compris, je continue</button>
+</div>
+
+<!-- MODULE 7 -->
+<div id="m7" class="module-page">
+  <div class="module-header">
+    <div class="module-tag">📝 Module 7 · Construire</div>
+    <h2>Fiches produit <span class="gradient">qui vendent</span></h2>
+    <p class="module-desc">La fiche produit, c'est votre vendeur en ligne. Un bon vendeur convainc en 10 secondes. Une bonne fiche produit fait la même chose : elle rassure, elle donne envie, et elle pousse à l'achat.</p>
+    <div class="module-meta"><div class="module-meta-item">⏱ 45 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div><div class="module-meta-item">📝 Template inclus</div></div>
+  </div>
+
+  <h3 class="section-title">L'anatomie d'une fiche qui convertit</h3>
+  <div class="highlight-box">
+    <h3>Les 7 éléments d'une fiche produit parfaite</h3>
+    <div class="hb-grid">
+      <div class="hb-item"><div class="hb-icon">📸</div><h4>Photos (minimum 4)</h4><p>Photo face, photo détail, photo portée/en situation, photo packaging. Fond blanc pour Shopping, lifestyle pour le site.</p></div>
+      <div class="hb-item"><div class="hb-icon">🏷</div><h4>Titre clair</h4><p>"Sandales Plates Cuir Femme — Confort Été" Pas de référence, pas de code. Le client doit comprendre le produit en 2 secondes.</p></div>
+      <div class="hb-item"><div class="hb-icon">💶</div><h4>Prix + prix barré</h4><p>Affichez le prix barré si possible. "59€ <s>79€</s>" attire l'œil et crée le sentiment de bonne affaire.</p></div>
+      <div class="hb-item"><div class="hb-icon">✍️</div><h4>Description 200+ mots</h4><p>D'abord les BÉNÉFICES ("Confort toute la journée"), ensuite les caractéristiques techniques. Écrivez comme si vous parliez à un ami.</p></div>
+      <div class="hb-item"><div class="hb-icon">⭐</div><h4>Avis clients</h4><p>Même 5 avis suffisent au début. Demandez à vos premiers clients de laisser un avis en échange d'un code promo.</p></div>
+      <div class="hb-item"><div class="hb-icon">🛡</div><h4>Éléments de confiance</h4><p>"Livraison gratuite · Retours 30j · Paiement sécurisé" sous le bouton d'ajout au panier. Indispensable.</p></div>
+      <div class="hb-item"><div class="hb-icon">🛒</div><h4>Bouton d'achat visible</h4><p>Le bouton "Ajouter au panier" doit être visible SANS scroller sur mobile. Couleur contrastante, texte clair.</p></div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sh-icon">✍️</span>
+      <h3>Template de description produit — Copiez et adaptez</h3>
+      <span class="sh-badge">Template</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="code-block">
+        <span class="code-lang">Template</span>
+PARAGRAPHE 1 — Le bénéfice principal (2-3 phrases)
+"Profitez d'un confort absolu du matin au soir avec nos [produit].
+Conçues en [matière] de qualité, elles [bénéfice principal] tout en
+vous offrant un style [adjectif] pour toutes les occasions."
+
+PARAGRAPHE 2 — Les caractéristiques (liste)
+• Matière : [cuir véritable / coton bio / etc.]
+• Taille : [disponible du 36 au 42]
+• Couleurs : [beige, noir, cognac]
+• Entretien : [facile, chiffon humide]
+
+PARAGRAPHE 3 — La réassurance (2 phrases)
+"Livraison gratuite en France sous 3-5 jours ouvrés.
+Pas satisfait ? Retour gratuit sous 30 jours, sans condition."
+      </div>
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-content">
+          <h4>Le secret des descriptions qui vendent</h4>
+          <p>Ne décrivez pas le produit, décrivez ce que le client RESSENT en l'utilisant. "Semelle en caoutchouc antidérapant" → ennuyeux. "Marchez en confiance sur tous les terrains, même en bord de mer" → ça donne envie. Bénéfice &gt; Caractéristique, toujours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sh-icon">📸</span>
+      <h3>Les photos produit — Comment les faire gratuitement</h3>
+      <span class="sh-badge">Photos</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <p class="body-text">Vous n'avez pas besoin d'un photographe professionnel. Un smartphone récent + lumière naturelle (près d'une fenêtre) + un fond blanc (feuille A3 ou drap blanc) suffisent pour des photos correctes. Mais si vous faites du dropshipping pur, utilisez les photos du fournisseur et améliorez-les :</p>
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Demandez les photos HD au fournisseur</strong> — Ils ont souvent des photos pros non disponibles sur le listing public. Un simple email suffit.</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Retouchez avec Canva (gratuit)</strong> — Supprimez le fond, ajoutez votre logo en watermark discret, améliorez la luminosité.</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Première photo = fond blanc</strong> (obligatoire pour Google Shopping). Photos suivantes = lifestyle/mise en situation.</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Taille minimum 800×800 pixels</strong> pour que le zoom fonctionne sur Shopify et que Google Shopping les accepte.</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Ajoutez une photo "taille réelle"</strong> — Le produit tenu en main ou porté donne une idée de la dimension. Réduit les retours de 20%.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <button class="complete-btn" onclick="completeModule('m7',this)">✓ Module compris, je continue</button>
+</div>
+
+<!-- MODULE 8 -->
+<div id="m8" class="module-page">
+  <div class="module-header">
+    <div class="module-tag">🔍 Module 8 · Comprendre Google</div>
+    <h2>SEO vs SEA — <span class="gradient">Le guide simple</span></h2>
+    <p class="module-desc">Google est la porte d'entrée principale de vos futurs clients. Il existe deux façons d'y apparaître : gratuitement (SEO) ou en payant (SEA). Ce module vous explique la différence et quand utiliser chacun.</p>
+    <div class="module-meta"><div class="module-meta-item">⏱ 30 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div></div>
+  </div>
+
+  <div class="callout beginner">
+    <div class="callout-icon">💬</div>
+    <div class="callout-content">
+      <h4>Imaginez Google comme un centre commercial</h4>
+      <p><strong>Le SEO</strong>, c'est avoir une boutique bien placée dans le centre — les gens vous trouvent naturellement en se promenant. Ça prend du temps à s'installer mais ensuite les clients viennent gratuitement. <strong>Le SEA</strong>, c'est payer un panneau publicitaire à l'entrée du centre. Les clients arrivent immédiatement, mais chaque visite vous coûte quelques centimes.</p>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">🌱</div><h3>SEO — Référencement naturel</h3><p><strong>Gratuit</strong> (pas de coût par clic) · Résultats en 3–6 mois · Trafic durable · Effort continu en contenu · 40–60% du trafic long terme · Travail d'écriture (fiches, blog) · <span class="tag green">Investissement long terme</span></p></div>
+    <div class="card"><div class="card-icon">🚀</div><h3>SEA — Google Ads (publicité)</h3><p><strong>Payant</strong> (0.20–1.50€ par clic) · Résultats en 24h · Trafic instantané · Besoin de budget continu · 60–80% du CA au début · Google Shopping + Search · <span class="tag orange">Résultats immédiats</span></p></div>
+  </div>
+
+  <div class="formula">
+    <div class="formula-label">La stratégie gagnante pour un débutant</div>
+    <div class="formula-eq">SEA immédiat <span class="op">+</span> SEO en parallèle <span class="op">=</span> CA court terme <span class="op">+</span> CA long terme</div>
+    <div class="formula-desc">Lancez Google Ads dès le jour 1 pour générer vos premières ventes (et collecter des données). En parallèle, travaillez votre SEO chaque semaine. En 6 mois, le SEO commence à générer du trafic gratuit qui réduit votre dépendance à la pub.</div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sh-icon">🖥</span>
+      <h3>Anatomie d'une page de résultats Google — Où apparaître ?</h3>
+      <span class="sh-badge">Visuel</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="visual-guide">
+        <div class="vg-emoji">🖥</div>
+        <h4>Ce que voit votre client quand il tape "sandales femme" dans Google</h4>
+        <p>De haut en bas : les annonces Shopping (images produits avec prix) → les annonces texte Search (avec "Sponsorisé") → les résultats naturels SEO. Votre objectif : être visible dans les 3 zones.</p>
+      </div>
+      <table class="styled-table">
+        <thead><tr><th>Zone</th><th>Type</th><th>Comment y apparaître</th><th>Coût</th></tr></thead>
+        <tbody>
+          <tr><td>🛒 Shopping (en haut)</td><td>SEA</td><td>Google Merchant Center + campagne Shopping/PMax</td><td>0.15–0.80€ par clic</td></tr>
+          <tr><td>📝 Annonces texte</td><td>SEA</td><td>Campagne Search avec mots-clés ciblés</td><td>0.30–1.50€ par clic</td></tr>
+          <tr><td>🌐 Résultats naturels</td><td>SEO</td><td>Contenu optimisé, site rapide, backlinks</td><td>Gratuit (mais effort)</td></tr>
+          <tr><td>❓ "People Also Ask"</td><td>SEO</td><td>FAQ bien rédigées sur vos pages</td><td>Gratuit</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <button class="complete-btn" onclick="completeModule('m8',this)">✓ Module compris, je continue</button>
+</div>
+
+<!-- MODULE 9 -->
+<div id="m9" class="module-page">
+  <div class="module-header">
+    <div class="module-tag">🔑 Module 9 · Comprendre Google</div>
+    <h2>Les mots-clés <span class="gradient">pour les nuls</span></h2>
+    <p class="module-desc">Les "mots-clés", c'est simplement ce que les gens tapent dans Google. Comprendre quels mots vos futurs clients utilisent est la base de tout — que ce soit pour le SEO ou la pub Google.</p>
+    <div class="module-meta"><div class="module-meta-item">⏱ 40 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div><div class="module-meta-item">🛠 Exercice</div></div>
+  </div>
+
+  <h3 class="section-title">Comprendre l'intention : pourquoi les gens cherchent ?</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">❓</div><h3>"Comment choisir des sandales"</h3><p>Cette personne <strong>s'informe</strong>. Elle n'est pas prête à acheter. → Pour votre blog (SEO). Pas pour la pub.</p></div>
+    <div class="card"><div class="card-icon">⚖️</div><h3>"Meilleures sandales femme 2025"</h3><p>Cette personne <strong>compare</strong>. Elle est presque prête. → Blog comparatif ou pub Google avec vos arguments.</p></div>
+    <div class="card"><div class="card-icon">💳</div><h3>"Acheter sandales cuir femme"</h3><p>Cette personne <strong>veut acheter maintenant</strong>. C'est votre client idéal. → Pub Google en priorité absolue.</p></div>
+  </div>
+
+  <div class="callout beginner">
+    <div class="callout-icon">🎯</div>
+    <div class="callout-content">
+      <h4>La règle d'or à retenir</h4>
+      <p>Plus le mot-clé est précis et long, plus la personne est proche de l'achat. "sandales" → vague. "acheter sandales plates cuir femme pas cher" → cette personne sort sa carte bleue. <strong>En pub, ciblez les mots longs et précis en premier.</strong> Ils coûtent moins cher et vendent plus.</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sh-icon">🛠</span>
+      <h3>Exercice : Trouver vos 20 premiers mots-clés (gratuit, 20 min)</h3>
+      <span class="sh-badge">Pratique</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Google Autocomplete — Le plus simple du monde</h4><p>Tapez votre produit dans Google mais n'appuyez PAS sur Entrée. Regardez les suggestions automatiques. Ce sont les recherches les plus fréquentes. Notez les 10 plus pertinentes.</p></div></div>
+        <div class="step-connector"></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><h4>"Recherches associées" en bas de page</h4><p>Tapez votre mot-clé principal et scrollez tout en bas de la page Google. Les "recherches associées" = d'autres mots-clés que vos clients potentiels utilisent. Notez-en 5–10 de plus.</p></div></div>
+        <div class="step-connector"></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Ubersuggest (gratuit, 3 recherches/jour)</h4><p>Allez sur neilpatel.com/ubersuggest → tapez votre mot-clé → Pays = France. Vous voyez le volume de recherche mensuel et le CPC estimé. Notez tous les mots avec 100+ recherches/mois.</p></div></div>
+        <div class="step-connector"></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Classez vos mots-clés par priorité</h4><p>Mettez une ⭐ à côté de chaque mot qui contient "acheter", "pas cher", "livraison", "meilleur" — ce sont ceux qui convertissent le mieux. Ce sera votre liste de départ pour Google Ads.</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="complete-btn" onclick="completeModule('m9',this)">✓ Module compris, je continue</button>
+</div>
+
+<!-- MODULE 10 -->
+<div id="m10" class="module-page">
+  <div class="module-header">
+    <div class="module-tag">🎯 Module 10 · Premiers pas Ads</div>
+    <h2>Créer son <span class="gradient">compte Google Ads</span></h2>
+    <p class="module-desc">C'est le grand moment. Ce module vous guide étape par étape pour créer votre compte Google Ads et Google Merchant Center sans vous tromper. Chaque erreur de configuration au départ peut coûter des centaines d'euros. Suivez exactement les étapes.</p>
+    <div class="module-meta"><div class="module-meta-item">⏱ 60 min</div><div class="module-meta-item"><span class="level-badge level-medium">Technique</span></div><div class="module-meta-item">💻 Pratique</div></div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-content">
+      <h4>IMPORTANT : Ne cliquez pas sur "Créer une campagne" quand Google le propose !</h4>
+      <p>Quand vous créez un compte Google Ads, Google vous pousse immédiatement à créer une campagne avec ses paramètres par défaut. Ces paramètres gaspillent votre budget. Choisissez <strong>"Passer"</strong> ou <strong>"Configurer sans campagne"</strong> à chaque fois. On créera la campagne nous-mêmes dans le module suivant.</p>
+    </div>
+  </div>
+
+  <h3 class="section-title">Étape 1 — Google Merchant Center</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Créer le compte Merchant Center</h4><p>Allez sur merchants.google.com → "Commencer". Utilisez le même compte Gmail que pour Google Ads. Renseignez le nom de votre boutique et l'URL de votre site Shopify.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Vérifier et revendiquer votre site</h4><p>GMC vous demande de prouver que le site est à vous. La méthode la plus simple : ajoutez la balise meta HTML dans votre theme.liquid (Online Store → Themes → Edit Code → theme.liquid → collez la balise dans le &lt;head&gt;).</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Connecter Shopify à Merchant Center</h4><p>Installez l'app "Google & YouTube" sur Shopify (gratuite, officielle Google). Elle synchronise automatiquement vos produits avec Merchant Center. Suivez le setup de l'app — c'est guidé.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Configurer les frais de port dans GMC</h4><p>Merchant Center → Shipping & Returns → Ajoutez vos tarifs de livraison EXACTEMENT comme sur votre site Shopify. Si les prix ne correspondent pas, Google refuse vos produits.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><h4>Attendre la validation du flux</h4><p>Google vérifie vos produits. Ça prend 24 à 72h. Vérifiez l'onglet "Diagnostics" pour voir s'il y a des erreurs à corriger. Zéro erreur critique = vous êtes prêt pour les campagnes Shopping.</p></div></div>
+  </div>
+
+  <h3 class="section-title">Étape 2 — Compte Google Ads</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">6</div><div class="step-body"><h4>Créer le compte Google Ads</h4><p>ads.google.com → "Commencer" → IGNOREZ la création de campagne → mode "Expert" (pas le mode simplifié). Le mode simplifié cache les options importantes dont vous aurez besoin.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">7</div><div class="step-body"><h4>Lier Google Ads à Merchant Center</h4><p>Dans Google Ads → Outils → Comptes associés → Google Merchant Center → Associer. C'est ce lien qui permet de diffuser vos produits en Shopping.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">8</div><div class="step-body"><h4>Configurer le suivi des conversions</h4><p>C'est l'étape la plus technique mais la plus importante. Installez l'app "Google & YouTube" de Shopify — elle configure automatiquement le tracking des achats. Vérifiez dans Google Ads → Outils → Conversions qu'une conversion "Purchase" apparaît.</p></div></div>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-icon">💡</div>
+    <div class="callout-content">
+      <h4>Vérification avant de continuer</h4>
+      <p>Avant de passer au module suivant, vérifiez que : Merchant Center affiche vos produits sans erreur critique, Google Ads est en mode Expert (pas simplifié), et le suivi de conversion "Purchase" est actif. Si l'un de ces 3 points n'est pas OK, ne lancez pas de campagne — corrigez d'abord.</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" onclick="completeModule('m10',this)">✓ Module compris, je continue</button>
+</div>
+
+<!-- MODULE 11 -->
+<div id="m11" class="module-page">
+  <div class="module-header">
+    <div class="module-tag">💰 Module 11 · Premiers pas Ads</div>
+    <h2>Lancer sa <span class="gradient">première campagne Shopping</span></h2>
+    <p class="module-desc">C'est le moment de vérité. Vous allez créer votre première campagne et voir vos produits apparaître dans Google Shopping. Suivez chaque étape exactement comme décrit — chaque paramètre compte.</p>
+    <div class="module-meta"><div class="module-meta-item">⏱ 45 min</div><div class="module-meta-item"><span class="level-badge level-medium">Technique</span></div><div class="module-meta-item">💰 Premier budget</div></div>
+  </div>
+
+  <div class="callout beginner">
+    <div class="callout-icon">🎯</div>
+    <div class="callout-content">
+      <h4>On lance quoi exactement ?</h4>
+      <p>Une campagne <strong>Performance Max</strong>. C'est le type de campagne recommandé par Google pour le e-commerce. Elle affiche vos produits dans Google Shopping (les images avec les prix) automatiquement. C'est la campagne la plus simple à configurer ET la plus rentable pour un débutant.</p>
+    </div>
+  </div>
+
+  <h3 class="section-title">Création pas-à-pas</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Google Ads → + Nouvelle campagne → Ventes</h4><p>Objectif = "Ventes". Google optimisera pour les achats. Ne choisissez jamais "Trafic" ou "Notoriété" pour du e-commerce — vous voulez des ventes, pas des visiteurs touristiques.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Type de campagne → Performance Max</h4><p>Sélectionnez votre compte Merchant Center associé. Google affichera la liste de vos produits. Gardez tous les produits pour commencer (on affinera après).</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Budget → 10 à 15€ par jour pour commencer</h4><p>C'est le minimum pour que Google ait assez de données pour apprendre. Moins de 10€/jour = trop lent, vous attendrez des semaines sans résultats significatifs. 15€/jour = ~450€/mois, un investissement raisonnable pour tester.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Stratégie d'enchères → Maximiser la valeur de conversion</h4><p>Pour commencer, choisissez "Maximiser la valeur de conversion" SANS cible ROAS. Laissez Google apprendre seul pendant les 2–4 premières semaines. On ajoutera une cible ROAS quand on aura assez de données (module 12).</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><h4>Ciblage → France uniquement</h4><p>Langues : Français. Localisation : France. Décochez les options d'expansion automatique. On reste concentré sur un marché pour commencer.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">6</div><div class="step-body"><h4>Groupe d'assets → Laissez vide pour commencer (Feed-Only)</h4><p>Ne remplissez PAS les images, vidéos et textes marketing. En laissant vide, Google diffuse uniquement en Shopping avec vos fiches produit. C'est la méthode "Feed-Only" — la plus rentable pour un débutant car 100% du budget va sur Shopping.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">7</div><div class="step-body"><h4>Lancez et NE TOUCHEZ À RIEN pendant 14 jours</h4><p>Sérieusement. La tentation de modifier après 3 jours est énorme. Résistez. Google a besoin de 14 jours minimum pour apprendre. Chaque modification remet le compteur à zéro. Observez, notez, mais ne changez rien.</p></div></div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-icon">⏰</div>
+    <div class="callout-content">
+      <h4>Attendez-vous à perdre de l'argent les 2 premières semaines</h4>
+      <p>C'est normal. Considérez ces 150–300€ comme un investissement en données. Google apprend quels produits intéressent les gens, à quelle heure, sur quel appareil. Ces données sont précieuses et vont rendre les semaines suivantes rentables. Les débutants qui paniquent et coupent après 5 jours recommencent éternellement à zéro.</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" onclick="completeModule('m11',this)">✓ Module compris, je continue</button>
+</div>
+
+<!-- MODULE 12 -->
+<div id="m12" class="module-page">
+  <div class="module-header">
+    <div class="module-tag">📊 Module 12 · Premiers pas Ads</div>
+    <h2>Lire ses <span class="gradient">résultats — Le tableau de bord</span></h2>
+    <p class="module-desc">Votre campagne tourne depuis 14 jours. Il est temps de comprendre les chiffres. Ce module traduit le jargon Google Ads en français simple et vous apprend à identifier ce qui fonctionne et ce qui ne fonctionne pas.</p>
+    <div class="module-meta"><div class="module-meta-item">⏱ 40 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div><div class="module-meta-item">📊 Lecture de données</div></div>
+  </div>
+
+  <h3 class="section-title">Les 8 chiffres à comprendre (et uniquement ceux-là au début)</h3>
+  <table class="styled-table">
+    <thead><tr><th>Terme</th><th>Ce que ça veut dire</th><th>Bon chiffre</th><th>Mauvais chiffre</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Impressions</strong></td><td>Combien de fois votre annonce a été vue</td><td>1000+/jour</td><td>&lt;100/jour (produits mal ciblés)</td></tr>
+      <tr><td><strong>Clics</strong></td><td>Combien de personnes ont cliqué</td><td>50+/jour avec 15€ budget</td><td>&lt;10/jour (annonces pas attractives)</td></tr>
+      <tr><td><strong>CTR</strong></td><td>% de gens qui voient et cliquent</td><td>&gt;1% en Shopping</td><td>&lt;0.5% (photos/prix à revoir)</td></tr>
+      <tr><td><strong>CPC</strong></td><td>Coût par clic (ce que vous payez)</td><td>0.15–0.60€</td><td>&gt;1€ (niche trop compétitive ?)</td></tr>
+      <tr><td><strong>Conversions</strong></td><td>Nombre de ventes</td><td>1+/jour avec 15€</td><td>0 après 14 jours (problème)</td></tr>
+      <tr><td><strong>Taux conversion</strong></td><td>% de cliqueurs qui achètent</td><td>&gt;2%</td><td>&lt;0.5% (problème sur le site)</td></tr>
+      <tr><td><strong>Coût / conversion</strong></td><td>Combien coûte chaque vente en pub</td><td>&lt;30% du prix de vente</td><td>&gt;50% du prix (pas rentable)</td></tr>
+      <tr><td><strong>ROAS</strong></td><td>Revenu pub / Dépense pub</td><td>&gt;3× (vous gagnez de l'argent)</td><td>&lt;2× (vous perdez de l'argent)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout beginner">
+    <div class="callout-icon">💡</div>
+    <div class="callout-content">
+      <h4>Le ROAS en ultra-simple</h4>
+      <p>Si vous dépensez 100€ en pub et que ça génère 400€ de ventes, votre ROAS = 4×. Avec 40% de marge, ça fait 160€ de marge brute − 100€ de pub = <strong>60€ de profit net</strong>. Tant que le ROAS est supérieur à votre ROAS break-even (en général 2.5–3×), vous gagnez de l'argent.</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sh-icon">🔍</span>
+      <h3>Diagnostic : Que faire selon vos résultats après 14 jours ?</h3>
+      <span class="sh-badge">Diagnostic</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="card-grid">
+        <div class="card"><div class="card-icon">✅</div><h3>ROAS &gt; 3× → Excellent</h3><p>Vous êtes rentable. Ne changez rien. Augmentez le budget de 20% par semaine et passez au module 12 pour optimiser davantage.</p></div>
+        <div class="card"><div class="card-icon">⚠️</div><h3>ROAS entre 2× et 3× → Correct</h3><p>Vous êtes au break-even ou légèrement positif. Regardez quels produits vendent le mieux et concentrez le budget dessus. Passez au module 12.</p></div>
+        <div class="card"><div class="card-icon">🔻</div><h3>ROAS &lt; 2× → Pas encore rentable</h3><p>Normal au début. Vérifiez : vos prix sont-ils compétitifs ? Vos photos sont-elles attractives ? Votre site est-il rapide sur mobile ? Corrigez, puis relancez 14 jours.</p></div>
+        <div class="card"><div class="card-icon">❌</div><h3>0 vente après 14 jours → Problème</h3><p>Vérifiez en urgence : le tracking de conversion fonctionne-t-il ? (faites un achat test). Vos produits sont-ils visibles dans Shopping ? Votre prix est-il trop élevé vs la concurrence ?</p></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="complete-btn" onclick="completeModule('m12',this)">✓ Module compris, je continue</button>
+</div>
+
+<!-- MODULE 13 -->
+<div id="m13" class="module-page">
+  <div class="module-header">
+    <div class="module-tag">🌱 Module 13 · Objectif 10k€</div>
+    <h2>SEO pour <span class="gradient">débutants</span></h2>
+    <p class="module-desc">Le SEO, c'est votre investissement long terme. Chaque page optimisée, chaque article publié est une graine qui donnera du trafic gratuit pendant des mois voire des années. Ce module vous donne les bases absolues, sans jargon.</p>
+    <div class="module-meta"><div class="module-meta-item">⏱ 50 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div></div>
+  </div>
+
+  <h3 class="section-title">Les 5 choses que Google regarde pour classer votre site</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">📝</div><h3>1. Le contenu de vos pages</h3><p>Est-ce que votre page parle de ce que le client cherche ? Si quelqu'un tape "sandales cuir femme", votre page doit contenir ces mots naturellement dans le titre, la description, les H1...</p></div>
+    <div class="card"><div class="card-icon">⚡</div><h3>2. La vitesse de votre site</h3><p>Un site lent = Google vous pénalise. Testez votre vitesse sur pagespeed.web.dev. Objectif : score &gt;60 sur mobile. Réduisez la taille des images, supprimez les apps inutiles.</p></div>
+    <div class="card"><div class="card-icon">📱</div><h3>3. L'expérience mobile</h3><p>65% des visites viennent du téléphone. Si votre site est moche ou difficile à utiliser sur mobile, Google vous classe en bas. Testez votre boutique sur votre propre téléphone.</p></div>
+    <div class="card"><div class="card-icon">🔗</div><h3>4. Les liens vers votre site</h3><p>Quand d'autres sites font un lien vers le vôtre, Google considère que vous êtes "recommandé". Plus vous avez de liens de qualité, plus vous montez dans les résultats.</p></div>
+    <div class="card"><div class="card-icon">🏗</div><h3>5. La structure du site</h3><p>Google doit pouvoir "lire" votre site facilement. Des titres clairs (H1, H2), des URLs propres (/collections/sandales-plates vs /collections/12345), et un menu logique.</p></div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sh-icon">✅</span>
+      <h3>Actions SEO concrètes à faire cette semaine (30 min)</h3>
+      <span class="sh-badge">Actions</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Réécrivez les titres de vos 10 meilleurs produits</strong> avec le mot-clé que le client taperait. "Ref-2845" → "Sandales Plates Cuir Femme — Été 2025"</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Ajoutez un texte de 200 mots sur chaque page collection</strong> (catégorie). Au-dessus des produits, pas en dessous. Incluez votre mot-clé principal naturellement.</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Remplissez les alt des images</strong> (Shopify → produit → cliquez sur l'image → "alt text"). Décrivez l'image : "Sandales plates cuir beige femme portées été".</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Inscrivez votre site sur Google Search Console</strong> (search.google.com/search-console). C'est gratuit. Google vous montrera pour quels mots-clés votre site apparaît.</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Écrivez et publiez 1 article de blog</strong> sur votre thématique. 800+ mots, répondant à une question que vos clients se posent. Ex : "Comment choisir des sandales confortables pour marcher longtemps".</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text"><strong>Ajoutez 3 FAQ sur chaque fiche produit</strong>. Questions/réponses réelles. Google les affiche parfois directement dans les résultats → plus de clics gratuits.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <button class="complete-btn" onclick="completeModule('m13',this)">✓ Module compris, je continue</button>
+</div>
+
+<!-- MODULE 14 -->
+<div id="m14" class="module-page">
+  <div class="module-header">
+    <div class="module-tag">📈 Module 14 · Objectif 10k€</div>
+    <h2>Premières <span class="gradient">optimisations</span></h2>
+    <p class="module-desc">Votre campagne tourne, vous avez vos premières ventes. Maintenant, chaque petite amélioration peut doubler vos résultats. Ce module vous montre les optimisations les plus simples et les plus rentables à faire dès maintenant.</p>
+    <div class="module-meta"><div class="module-meta-item">⏱ 50 min</div><div class="module-meta-item"><span class="level-badge level-medium">Intermédiaire</span></div></div>
+  </div>
+
+  <h3 class="section-title">Les 5 optimisations à faire en premier (par ordre d'impact)</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Optimisez les titres de votre flux produit</h4><p>C'est l'optimisation #1 en Shopping. Allez dans Shopify, modifiez les titres de vos 20 produits les plus vus pour inclure le mot-clé que les clients tapent. "[Marque] + [Type produit] + [Caractéristique] + [Genre]". Impact : CTR Shopping × 2 en 1–2 semaines.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Coupez les produits qui perdent de l'argent</h4><p>Dans Google Ads → Produits → Regardez quels produits ont eu 30+ clics et 0 vente. Excluez-les de votre campagne PMax (via un custom label ou un filtre produit). Votre budget se concentre sur ce qui vend.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Ajoutez une cible ROAS (si 30+ ventes)</h4><p>Après 30 conversions, ajoutez un Target ROAS dans les paramètres de campagne. Mettez-le à -20% de votre ROAS actuel. Si votre ROAS actuel est 4×, mettez le Target à 3.2×. Google optimise plus intelligemment avec cette cible.</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Améliorez les photos des produits qui ont un bon nombre d'impressions mais peu de clics</h4><p>Beaucoup d'impressions + peu de clics = les gens voient votre produit mais ne cliquent pas. Le problème est souvent la photo (pas assez attractive) ou le prix (trop cher vs concurrents affichés à côté).</p></div></div>
+    <div class="step-connector"></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><h4>Ajoutez des éléments de confiance sur votre site</h4><p>Si vos clics ne convertissent pas (beaucoup de visiteurs, peu de ventes), le problème est votre site. Ajoutez : avis clients, badges de confiance, photos de meilleure qualité, page "À propos" crédible, numéro de téléphone visible.</p></div></div>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-icon">📅</div>
+    <div class="callout-content">
+      <h4>Votre routine hebdomadaire (20 minutes chaque dimanche)</h4>
+      <p><strong>5 min :</strong> Regardez votre ROAS de la semaine. En hausse ou en baisse ? <strong>5 min :</strong> Vérifiez les produits les plus cliqués sans vente → excluez si 50+ clics. <strong>5 min :</strong> Notez votre CA, dépenses, et profit dans un Google Sheet. <strong>5 min :</strong> Lisez un article de blog ou regardez une vidéo pour apprendre un truc nouveau. C'est tout. 20 minutes suffisent au début.</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" onclick="completeModule('m14',this)">✓ Module compris, je continue</button>
+</div>
+
+<!-- MODULE 15 -->
+<div id="m15" class="module-page">
+  <div class="module-header">
+    <div class="module-tag">📧 Module 15 · Objectif 10k€</div>
+    <h2>Email &amp; <span class="gradient">Fidélisation</span></h2>
+    <p class="module-desc">Acquérir un nouveau client coûte 5 à 7 fois plus cher que de vendre à un client existant. L'email marketing vous permet de garder le contact avec vos acheteurs et de les faire revenir — gratuitement.</p>
+    <div class="module-meta"><div class="module-meta-item">⏱ 40 min</div><div class="module-meta-item"><span class="level-badge level-easy">Facile</span></div></div>
+  </div>
+
+  <h3 class="section-title">Les 3 emails automatiques à configurer dès maintenant</h3>
+  <p class="body-text">Installez Klaviyo (gratuit jusqu'à 250 contacts) ou l'email natif de Shopify. Ces 3 emails se déclenchent automatiquement et travaillent pour vous 24/7 :</p>
+
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">🛒</div><h3>1. Abandon de panier</h3><p><strong>Quand :</strong> quelqu'un met un produit dans le panier et part sans acheter.<br><strong>Email 1 (1h après) :</strong> "Votre panier vous attend"<br><strong>Email 2 (24h après) :</strong> "Toujours intéressé ? Livraison offerte aujourd'hui"<br><strong>Impact :</strong> récupère 10–15% des paniers abandonnés. Sur 100 paniers abandonnés par mois, c'est 10–15 ventes gratuites.</p></div>
+    <div class="card"><div class="card-icon">👋</div><h3>2. Bienvenue nouveau client</h3><p><strong>Quand :</strong> quelqu'un s'inscrit à votre newsletter (pop-up -10%).<br><strong>Email 1 (immédiat) :</strong> code promo + présentation de la marque<br><strong>Email 2 (J+3) :</strong> vos best-sellers<br><strong>Impact :</strong> convertit 8–15% des inscrits en acheteurs.</p></div>
+    <div class="card"><div class="card-icon">📦</div><h3>3. Post-achat</h3><p><strong>Quand :</strong> le client a reçu sa commande (J+7).<br><strong>Email :</strong> "Comment se passent vos [produit] ? Laissez un avis et recevez -10% sur votre prochaine commande."<br><strong>Impact :</strong> génère des avis (crucial pour la confiance) + encourage le réachat.</p></div>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-icon">💡</div>
+    <div class="callout-content">
+      <h4>Le pop-up qui change tout</h4>
+      <p>Ajoutez un pop-up sur votre site : "Recevez -10% sur votre première commande" en échange de l'email. Taux de capture moyen : 3–5% des visiteurs. Sur 1 000 visiteurs/mois, c'est 30–50 emails collectés. En 6 mois, vous avez une liste de 200–300 contacts qui reçoivent vos promotions gratuitement. C'est votre assurance-vie si les CPC Google augmentent.</p>
+    </div>
+  </div>
+
+  <button class="complete-btn" onclick="completeModule('m15',this)">✓ Module compris, je continue</button>
+</div>
+
+<!-- MODULE 16 -->
+<div id="m16" class="module-page">
+  <div class="module-header">
+    <div class="module-tag">🚀 Module 16 · Objectif 10k€</div>
+    <h2>Roadmap <span class="gradient">0 → 10 000€/mois</span></h2>
+    <p class="module-desc">Ce dernier module synthétise tout en un plan d'action semaine par semaine. Imprimez-le, affichez-le au-dessus de votre bureau, et cochez chaque étape. Dans 90 jours, votre boutique sera méconnaissable.</p>
+    <div class="module-meta"><div class="module-meta-item">⏱ 30 min</div><div class="module-meta-item">🎯 Plan d'action</div></div>
+  </div>
+
+  <h3 class="section-title">Semaine par semaine — Votre plan de vol</h3>
+
+  <div class="section-block">
+    <div class="section-header open" onclick="toggleSection(this)">
+      <span class="sh-icon">📅</span>
+      <h3>Semaines 1–2 : Construction (0€ de CA — c'est normal)</h3>
+      <span class="sh-badge">Setup</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Niche validée avec Google Trends + Google Shopping (Module 2)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">2–3 fournisseurs identifiés, échantillons commandés (Module 3)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Boutique Shopify live avec 20–30 produits (Module 4)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Fiches produit rédigées avec 4+ photos et descriptions 200+ mots (Module 5)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Google Merchant Center configuré et validé (Module 8)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Google Ads configuré avec suivi de conversion actif (Module 8)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Pop-up email installé pour capturer les emails (Module 13)</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sh-icon">📅</span>
+      <h3>Semaines 3–4 : Première campagne (premières ventes attendues)</h3>
+      <span class="sh-badge">Lancement</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Campagne PMax Feed-Only lancée à 10–15€/jour (Module 9)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">NE RIEN TOUCHER pendant 14 jours (discipline !)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Email abandon panier + bienvenue configurés (Module 13)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">2 articles de blog publiés (Module 11)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Google Search Console configuré (Module 11)</span></li>
+      </ul>
+      <div class="metrics">
+        <div class="metric"><div class="m-val">300€</div><div class="m-label">Budget pub mois 1</div><div class="m-trend">Phase d'apprentissage</div></div>
+        <div class="metric"><div class="m-val">5–15</div><div class="m-label">Ventes attendues</div><div class="m-trend">Ne pas paniquer si &lt;5</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sh-icon">📅</span>
+      <h3>Semaines 5–8 : Optimisation (objectif 2 000–3 000€/mois CA)</h3>
+      <span class="sh-badge">Croissance</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Premières optimisations appliquées (Module 12) : titres flux, produits exclus, cible ROAS</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Budget augmenté à 20–30€/jour si ROAS &gt; 2.5×</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">20 produits supplémentaires ajoutés au catalogue</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">4 articles de blog supplémentaires publiés</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">10+ avis clients collectés (demandez activement !)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Routine hebdomadaire du dimanche installée (20 min/semaine)</span></li>
+      </ul>
+      <div class="metrics">
+        <div class="metric"><div class="m-val">600€</div><div class="m-label">Budget pub mois 2</div><div class="m-trend">Si ROAS positif</div></div>
+        <div class="metric"><div class="m-val">2–3k€</div><div class="m-label">CA mensuel cible</div><div class="m-trend">+SEO qui démarre</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sh-icon">📅</span>
+      <h3>Mois 3–6 : Scaling (objectif 5 000 → 10 000€/mois CA)</h3>
+      <span class="sh-badge">Scale</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Budget augmenté à 50–80€/jour (+20% par semaine max)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Catalogue porté à 100–200 produits</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Campagne Search lancée sur vos best-sellers (en plus de PMax)</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">SEO : premières positions organiques sur les mots-clés longue traîne</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Email marketing : 100+ contacts, flows automatiques actifs</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Premiers fournisseurs européens contactés pour réduire les délais</span></li>
+        <li onclick="toggleCheck(this)"><div class="cb"></div><span class="cl-text">Passage à la <strong>Formation Avancée</strong> pour continuer vers 50k€ puis 100k€/mois</span></li>
+      </ul>
+      <div class="metrics">
+        <div class="metric"><div class="m-val">1.5k€</div><div class="m-label">Budget pub mois 3–6</div><div class="m-trend">Croissance progressive</div></div>
+        <div class="metric"><div class="m-val">10k€</div><div class="m-label">CA mensuel cible</div><div class="m-trend">Objectif atteint</div></div>
+        <div class="metric"><div class="m-val">3–4k€</div><div class="m-label">Profit net estimé</div><div class="m-trend">Marge 30–40%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="complete-btn" onclick="completeModule('m16',this)">✓ Formation terminée — Passez à l'action !</button>
 </div>
 
 </main>
 
 <script>
 var completedModules={};
-function showPage(id){document.querySelectorAll('.module-page, #hero').forEach(function(el){el.classList.remove('active');el.style.display='none';});var t=document.getElementById(id);if(t){t.style.display='block';t.classList.add('active');}document.querySelectorAll('.nav-item').forEach(function(el){el.classList.remove('active');});var n=document.getElementById('nav-'+id);if(n)n.classList.add('active');window.scrollTo(0,0);document.getElementById('sidebar').classList.remove('open');}
-document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.module-page').forEach(function(el){el.style.display='none';});document.getElementById('hero').style.display='block';document.querySelectorAll('.tab-panel').forEach(function(p){if(!p.classList.contains('active'))p.style.display='none';else p.style.display='block';});document.querySelectorAll('.section-body').forEach(function(b){if(!b.classList.contains('open'))b.style.display='none';else b.style.display='block';});});
-function toggleSection(h){var b=h.nextElementSibling;if(b.classList.contains('open')){b.classList.remove('open');b.style.display='none';h.classList.remove('open');}else{b.classList.add('open');b.style.display='block';h.classList.add('open');}}
-function switchTab(btn,pid){var tn=btn.closest('.tab-nav');var tabs=tn.closest('.tabs');tn.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');tabs.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');p.style.display='none';});var p=document.getElementById(pid);if(p){p.classList.add('active');p.style.display='block';}}
-function toggleCheck(li){li.classList.toggle('checked');updateProgress();}
-function completeModule(mid,btn){completedModules[mid]=true;btn.classList.add('done');btn.textContent='✓ Terminé !';var n=document.getElementById('nav-'+mid);if(n)n.classList.add('completed');updateProgress();}
-function updateProgress(){var total=15;var done=Object.keys(completedModules).length;var pct=Math.round((done/total)*100);document.getElementById('prog-fill').style.width=pct+'%';document.getElementById('prog-pct').textContent=pct+'%';}
+var checkedItems={};
+var currentPage='hero';
+var moduleOrder=['hero','m1','m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12','m13','m14','m15','m16'];
+
+/* ===== LOCAL STORAGE PERSISTENCE ===== */
+function saveState(){
+  try {
+    localStorage.setItem('formation_completed', JSON.stringify(completedModules));
+    localStorage.setItem('formation_checked', JSON.stringify(checkedItems));
+    localStorage.setItem('formation_page', currentPage);
+  } catch(e){}
+}
+function loadState(){
+  try {
+    var cm=localStorage.getItem('formation_completed');
+    if(cm){ completedModules=JSON.parse(cm); Object.keys(completedModules).forEach(function(mid){
+      var n=document.getElementById('nav-'+mid); if(n) n.classList.add('completed');
+      /* Restore button — works even if module is hidden (display:none) */
+      var mod=document.getElementById(mid);
+      if(mod){
+        var btn=mod.querySelector('.complete-btn');
+        if(btn){
+          /* Save original label before overwriting */
+          if(!btn.dataset.originalLabel) btn.dataset.originalLabel=btn.textContent.trim();
+          btn.classList.add('done');
+          btn.textContent='✓ Terminé !';
+        }
+      }
+    });}
+    var ci=localStorage.getItem('formation_checked');
+    if(ci){ checkedItems=JSON.parse(ci); Object.keys(checkedItems).forEach(function(key){
+      var parts=key.split('_'); var modId=parts[0]; var liIdx=parseInt(parts[1]);
+      var mod=document.getElementById(modId); if(mod){
+        var items=mod.querySelectorAll('.checklist li');
+        if(items[liIdx]){ items[liIdx].classList.add('checked'); }
+      }
+    });}
+    updateProgress();
+  } catch(e){}
+}
+
+/* ===== INTRO CINEMATIC ANIMATION ===== */
+function runIntroCinematic(){
+  var canvas=document.getElementById('intro-canvas');
+  if(!canvas) return skipIntro();
+  var ctx=canvas.getContext('2d');
+  canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+  var particles=[]; var lines=[]; var phase=0;
+  /* Create grid particles */
+  for(var i=0;i<80;i++){
+    particles.push({
+      x:Math.random()*canvas.width, y:Math.random()*canvas.height,
+      tx:canvas.width/2+(Math.random()-.5)*300, ty:canvas.height/2+(Math.random()-.5)*200,
+      vx:0, vy:0, r:Math.random()*2+1,
+      color:'rgba('+(Math.random()>.5?'108,99,255':'255,101,132')+','+(Math.random()*.5+.2)+')',
+      delay:Math.random()*40
+    });
+  }
+  var logo=document.getElementById('intro-logo');
+  var bar=document.getElementById('intro-progress-bar');
+  var status=document.getElementById('intro-status');
+  var frame=0; var maxFrames=180;
+  var msgs=['Initialisation...','Chargement des modules...','Préparation du contenu...','Configuration des outils...','Prêt !'];
+
+  function animate(){
+    frame++;
+    ctx.fillStyle='rgba(10,10,15,.15)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+    var progress=Math.min(frame/maxFrames,1);
+    /* Update progress bar */
+    if(bar) bar.style.width=(progress*100)+'%';
+    if(status) status.textContent=msgs[Math.min(Math.floor(progress*msgs.length),msgs.length-1)];
+    /* Animate particles */
+    particles.forEach(function(p){
+      if(frame>p.delay){
+        if(frame<80){
+          /* Phase 1: converge to center */
+          p.x+=(p.tx-p.x)*.04; p.y+=(p.ty-p.y)*.04;
+        } else {
+          /* Phase 2: orbit */
+          var angle=(frame-80)*.02+p.delay*.1;
+          p.x=p.tx+Math.cos(angle)*50;
+          p.y=p.ty+Math.sin(angle)*30;
+        }
+      }
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.color; ctx.fill();
+    });
+    /* Draw connection lines */
+    for(var i=0;i<particles.length;i++){
+      for(var j=i+1;j<particles.length;j++){
+        var dx=particles[i].x-particles[j].x; var dy=particles[i].y-particles[j].y;
+        var dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<100){
+          ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle='rgba(108,99,255,'+(0.12*(1-dist/100))+')';
+          ctx.lineWidth=.5; ctx.stroke();
+        }
+      }
+    }
+    /* Logo appearance at frame 40 */
+    if(frame>=40&&logo){
+      var logoProgress=Math.min((frame-40)/30,1);
+      var ease=1-Math.pow(1-logoProgress,3);
+      logo.style.opacity=ease;
+      logo.style.transform='scale('+(0.5+ease*0.5)+')';
+    }
+    if(frame<maxFrames){ requestAnimationFrame(animate); }
+    else { finishIntro(); }
+  }
+  animate();
+}
+
+function finishIntro(){
+  var ls=document.getElementById('loading-screen');
+  setTimeout(function(){
+    ls.classList.add('hidden');
+    setTimeout(function(){ ls.style.display='none'; },800);
+  },500);
+}
+function skipIntro(){ var ls=document.getElementById('loading-screen'); ls.classList.add('hidden'); setTimeout(function(){ ls.style.display='none'; },800); }
+
+/* ===== SIDEBAR TOGGLE (MOBILE) ===== */
+function toggleSidebar(){
+  var sb=document.getElementById('sidebar');
+  var ov=document.getElementById('sidebar-overlay');
+  sb.classList.toggle('open');
+  if(ov){ ov.classList.toggle('active', sb.classList.contains('open')); }
+}
+
+/* ===== SHOW PAGE WITH ANIMATION ===== */
+function showPage(id){
+  document.querySelectorAll('.module-page, #hero').forEach(function(el){ el.classList.remove('active'); el.style.display='none'; });
+  var t=document.getElementById(id);
+  if(t){ t.style.display='block'; t.classList.add('active'); t.style.animation='none'; t.offsetHeight; t.style.animation='fadeInUp .4s ease-out'; }
+  document.querySelectorAll('.nav-item').forEach(function(el){ el.classList.remove('active'); });
+  var n=document.getElementById('nav-'+id); if(n) n.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('sidebar').classList.remove('open');
+  var ov=document.getElementById('sidebar-overlay'); if(ov) ov.classList.remove('active');
+  currentPage=id;
+  saveState();
+  if(t) animateModuleElements(t);
+  updateMobileBar();
+}
+
+function animateModuleElements(page){
+  var cards=page.querySelectorAll('.card');
+  cards.forEach(function(c,i){ c.style.opacity='1'; c.style.animation='none'; c.offsetHeight; c.style.animation='fadeInUp .4s ease-out '+(i*0.08)+'s both'; });
+  var sections=page.querySelectorAll('.section-block');
+  sections.forEach(function(s,i){ s.style.opacity='1'; s.style.animation='none'; s.offsetHeight; s.style.animation='fadeInUp .4s ease-out '+(i*0.06+0.15)+'s both'; });
+  var callouts=page.querySelectorAll('.callout');
+  callouts.forEach(function(c,i){ c.style.opacity='1'; c.style.animation='none'; c.offsetHeight; c.style.animation='slideInLeft .4s ease-out '+(i*0.08+0.2)+'s both'; });
+}
+
+/* ===== MOBILE BOTTOM BAR ===== */
+function updateMobileBar(){
+  document.querySelectorAll('.mob-btn').forEach(function(b){ b.classList.remove('active'); });
+  if(currentPage==='hero') document.getElementById('mob-home').classList.add('active');
+}
+function goToNextModule(){
+  var idx=moduleOrder.indexOf(currentPage);
+  if(idx<moduleOrder.length-1) showPage(moduleOrder[idx+1]);
+}
+function goToPrevModule(){
+  var idx=moduleOrder.indexOf(currentPage);
+  if(idx>0) showPage(moduleOrder[idx-1]);
+}
+
+/* ===== DOM READY ===== */
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.module-page').forEach(function(el){ el.style.display='none'; });
+  document.getElementById('hero').style.display='block';
+  document.querySelectorAll('.tab-panel').forEach(function(p){ if(!p.classList.contains('active')) p.style.display='none'; else p.style.display='block'; });
+  document.querySelectorAll('.section-body').forEach(function(b){ if(!b.classList.contains('open')) b.style.display='none'; else b.style.display='block'; });
+
+  /* Load saved state FIRST */
+  loadState();
+
+  /* Cinematic intro à chaque ouverture */
+  runIntroCinematic();
+
+  initParticles();
+  animateCounters();
+  addRippleEffects();
+  addSwipeGestures();
+
+  /* Restore last page */
+  try {
+    var lp=localStorage.getItem('formation_page');
+    if(lp&&lp!=='hero') showPage(lp);
+  } catch(e){}
+});
+
+/* ===== SECTION TOGGLE ===== */
+function toggleSection(h){
+  var b=h.nextElementSibling;
+  if(b.classList.contains('open')){
+    b.style.maxHeight=b.scrollHeight+'px'; b.offsetHeight;
+    b.style.maxHeight='0'; b.style.overflow='hidden'; b.style.padding='0 24px';
+    setTimeout(function(){ b.classList.remove('open'); b.style.display='none'; b.style.maxHeight=''; b.style.overflow=''; b.style.padding=''; h.classList.remove('open'); },300);
+  } else {
+    b.classList.add('open'); b.style.display='block'; b.style.maxHeight='0'; b.style.overflow='hidden';
+    b.offsetHeight; b.style.transition='max-height .4s ease-out, padding .3s'; b.style.maxHeight=b.scrollHeight+50+'px';
+    h.classList.add('open');
+    setTimeout(function(){ b.style.maxHeight=''; b.style.overflow=''; b.style.transition=''; },400);
+  }
+}
+
+function switchTab(btn,pid){
+  var tn=btn.closest('.tab-nav'); var tabs=tn.closest('.tabs');
+  tn.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); }); btn.classList.add('active');
+  tabs.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); p.style.display='none'; });
+  var p=document.getElementById(pid);
+  if(p){ p.classList.add('active'); p.style.display='block'; p.style.animation='fadeIn .3s ease-out'; }
+}
+
+/* ===== CHECKLIST WITH PERSISTENCE ===== */
+function toggleCheck(li){
+  li.classList.toggle('checked');
+  /* Find module and item index for persistence */
+  var mod=li.closest('.module-page')||li.closest('#hero');
+  if(mod){
+    var modId=mod.id;
+    var allItems=mod.querySelectorAll('.checklist li');
+    for(var i=0;i<allItems.length;i++){
+      if(allItems[i]===li){
+        var key=modId+'_'+i;
+        if(li.classList.contains('checked')){ checkedItems[key]=true; }
+        else { delete checkedItems[key]; }
+        break;
+      }
+    }
+  }
+  if(li.classList.contains('checked')){
+    var cb=li.querySelector('.cb'); if(cb){ cb.style.animation='scaleIn .3s cubic-bezier(.4,0,.2,1)'; }
+  }
+  updateProgress();
+  saveState();
+}
+
+/* ===== COMPLETE MODULE + CONFETTI ===== */
+function completeModule(mid,btn){
+  /* Always save original label on first encounter (before any text change) */
+  if(!btn.dataset.originalLabel || btn.dataset.originalLabel==='✓ Terminé !'){
+    /* Re-read from a safe source if already overwritten */
+    var origLabels={
+      'm1':'✓ Mindset verrouillé — On commence !',
+      'm16':'✓ Formation terminée — Passez à l\'action !'
+    };
+    btn.dataset.originalLabel = origLabels[mid] || '✓ Module compris, je continue';
+  }
+  if(completedModules[mid]){
+    /* Toggle OFF */
+    delete completedModules[mid];
+    btn.classList.remove('done');
+    btn.textContent=btn.dataset.originalLabel;
+    var n=document.getElementById('nav-'+mid); if(n) n.classList.remove('completed');
+    updateProgress(); saveState();
+  } else {
+    /* Toggle ON */
+    /* Save original label now if not yet saved */
+    if(!btn.dataset.originalLabel) btn.dataset.originalLabel=btn.textContent.trim();
+    completedModules[mid]=true;
+    btn.classList.add('done'); btn.textContent='✓ Terminé !';
+    var n=document.getElementById('nav-'+mid); if(n) n.classList.add('completed');
+    updateProgress(); saveState(); launchConfetti();
+    var idx=moduleOrder.indexOf(mid);
+    if(idx<moduleOrder.length-1){
+      setTimeout(function(){ showPage(moduleOrder[idx+1]); },1500);
+    }
+  }
+}
+
+function updateProgress(){
+  var total=16; var done=Object.keys(completedModules).length; var pct=Math.round((done/total)*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-pct').textContent=pct+'%';
+  if(pct===100){ launchConfetti(); launchConfetti(); }
+}
+
+/* ===== CONFETTI ===== */
+function launchConfetti(){
+  var container=document.getElementById('confetti-container');
+  var colors=['#6c63ff','#ff6584','#43e97b','#f9a825','#8b5cf6','#00d2ff'];
+  for(var i=0;i<60;i++){
+    var piece=document.createElement('div'); piece.className='confetti-piece';
+    piece.style.left=Math.random()*100+'%';
+    piece.style.background=colors[Math.floor(Math.random()*colors.length)];
+    piece.style.width=(Math.random()*8+4)+'px'; piece.style.height=(Math.random()*8+4)+'px';
+    piece.style.borderRadius=Math.random()>.5?'50%':'2px';
+    piece.style.animationDuration=(Math.random()*2+2)+'s';
+    piece.style.animationDelay=(Math.random()*0.5)+'s';
+    container.appendChild(piece);
+  }
+  setTimeout(function(){ container.innerHTML=''; },4000);
+}
+
+/* ===== ANIMATED COUNTERS ===== */
+function animateCounters(){
+  var stats=document.querySelectorAll('.hero-stat .num');
+  stats.forEach(function(el){
+    var text=el.textContent; var match=text.match(/(\d+)/);
+    if(match){
+      var target=parseInt(match[0]); var suffix=text.replace(match[0],''); var current=0;
+      var increment=Math.max(1,Math.floor(target/40));
+      var timer=setInterval(function(){
+        current+=increment; if(current>=target){ current=target; clearInterval(timer); }
+        el.textContent=current+suffix;
+      },30);
+    }
+  });
+}
+
+/* ===== PARTICLE SYSTEM ===== */
+function initParticles(){
+  var canvas=document.getElementById('particles-canvas'); if(!canvas) return;
+  var ctx=canvas.getContext('2d');
+  var hero=document.getElementById('hero');
+  function resize(){ canvas.width=hero.offsetWidth; canvas.height=hero.offsetHeight; }
+  resize();
+  var particles=[];
+  for(var i=0;i<50;i++){
+    particles.push({
+      x:Math.random()*canvas.width, y:Math.random()*canvas.height,
+      vx:(Math.random()-.5)*.3, vy:(Math.random()-.5)*.3,
+      r:Math.random()*2+.5, alpha:Math.random()*.4+.1
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(function(p){
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0) p.x=canvas.width; if(p.x>canvas.width) p.x=0;
+      if(p.y<0) p.y=canvas.height; if(p.y>canvas.height) p.y=0;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(108,99,255,'+p.alpha+')'; ctx.fill();
+    });
+    for(var i=0;i<particles.length;i++){
+      for(var j=i+1;j<particles.length;j++){
+        var dx=particles[i].x-particles[j].x; var dy=particles[i].y-particles[j].y;
+        var dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<120){
+          ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle='rgba(108,99,255,'+(0.08*(1-dist/120))+')';
+          ctx.lineWidth=.5; ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+  window.addEventListener('resize',resize);
+}
+
+/* ===== RIPPLE EFFECT ===== */
+function addRippleEffects(){
+  document.querySelectorAll('.hero-cta, .complete-btn, .next-module-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      var rect=btn.getBoundingClientRect();
+      var ripple=document.createElement('span'); ripple.className='ripple-effect';
+      ripple.style.left=(e.clientX-rect.left)+'px'; ripple.style.top=(e.clientY-rect.top)+'px';
+      ripple.style.width='10px'; ripple.style.height='10px';
+      btn.appendChild(ripple);
+      setTimeout(function(){ ripple.remove(); },600);
+    });
+  });
+}
+
+/* ===== SWIPE GESTURES (MOBILE) ===== */
+function addSwipeGestures(){
+  var startX=0; var startY=0; var threshold=80;
+  document.addEventListener('touchstart',function(e){ startX=e.touches[0].clientX; startY=e.touches[0].clientY; },{passive:true});
+  document.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-startX;
+    var dy=e.changedTouches[0].clientY-startY;
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>threshold){
+      if(dx>0){ /* swipe right = prev */ goToPrevModule(); }
+      else { /* swipe left = next */ goToNextModule(); }
+    }
+  },{passive:true});
+}
+
+/* ===== KEYBOARD NAVIGATION ===== */
+document.addEventListener('keydown',function(e){
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+  var idx=moduleOrder.indexOf(currentPage);
+  if(e.key==='ArrowRight'&&idx<moduleOrder.length-1){ showPage(moduleOrder[idx+1]); e.preventDefault(); }
+  if(e.key==='ArrowLeft'&&idx>0){ showPage(moduleOrder[idx-1]); e.preventDefault(); }
+  if(e.key==='Escape'){ showPage('hero'); e.preventDefault(); }
+});
+
+/* ===== SCROLL PROGRESS ===== */
+window.addEventListener('scroll',function(){
+  var winScroll=document.body.scrollTop||document.documentElement.scrollTop;
+  var height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+  var scrolled=height>0?(winScroll/height)*100:0;
+  document.getElementById('scroll-progress').style.width=scrolled+'%';
+},{passive:true});
+
+/* ===== INTERSECTION OBSERVER ===== */
+if('IntersectionObserver' in window){
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.style.opacity='1';
+        entry.target.style.animation='fadeInUp .5s ease-out both';
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.1});
+  /* Delay observer setup to after page is visible */
+  setTimeout(function(){
+    document.querySelectorAll('.module-page .section-block, .module-page .card, .module-page .callout, .module-page .highlight-box').forEach(function(el){
+      if(!el.closest('.module-page.active')&&!el.closest('#hero')){ el.style.opacity='0'; }
+      observer.observe(el);
+    });
+  },1000);
+}
+
+/* ===== SKIP INTRO ON TAP/CLICK ===== */
+document.getElementById('loading-screen').addEventListener('click',function(){
+  finishIntro();
+});
 </script>
 </body>
 </html>
